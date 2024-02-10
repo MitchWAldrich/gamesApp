@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import type {PropsWithChildren} from 'react';
-import {Pressable} from 'react-native';
+import {Button} from 'react-native';
 
 import {
   SafeAreaView,
@@ -665,6 +665,10 @@ function App(): React.JSX.Element {
               clickType="default"
               valueCallback={getClickValue}
             />
+          </View>
+          <View>
+            <Button title="Hit"></Button>
+            <Button title="Miss"></Button>
           </View>
         </View>
       </ScrollView>
