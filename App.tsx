@@ -55,179 +55,184 @@ function App(): React.JSX.Element {
 
   // const [puzzle, setPuzzle] = useState(JSON.parse(JSON.stringify(initialPuzzle)))
 
-  // const puzzle = {
-  //   A: {
-  //     A1: {target: true, miss: false, hit: false},
-  //     A2: {target: false, miss: false, hit: false},
-  //     A3: {target: true, miss: false, hit: false},
-  //     A4: {target: true, miss: false, hit: false},
-  //     A5: {target: true, miss: false, hit: false},
-  //     A6: {target: false, miss: false, hit: false},
-  //     A7: {target: true, miss: false, hit: false},
-  //     A8: {target: false, miss: false, hit: false},
-  //   },
-  //   B: {
-  //     B1: {target: true, miss: false, hit: false},
-  //     B2: {target: false, miss: false, hit: false},
-  //     B3: {target: false, miss: false, hit: false},
-  //     B4: {target: false, miss: false, hit: false},
-  //     B5: {target: false, miss: false, hit: false},
-  //     B6: {target: false, miss: false, hit: false},
-  //     B7: {target: true, miss: false, hit: false},
-  //     B8: {target: false, miss: false, hit: false},
-  //   },
-  //   C: {
-  //     C1: {target: false, miss: false, hit: false},
-  //     C2: {target: false, miss: false, hit: false},
-  //     C3: {target: false, miss: false, hit: false},
-  //     C4: {target: false, miss: false, hit: false},
-  //     C5: {target: false, miss: false, hit: false},
-  //     C6: {target: false, miss: false, hit: false},
-  //     C7: {target: true, miss: false, hit: false},
-  //     C8: {target: false, miss: false, hit: false},
-  //   },
-  //   D: {
-  //     D1: {target: true, miss: false, hit: false},
-  //     D2: {target: true, miss: false, hit: false},
-  //     D3: {target: true, miss: false, hit: false},
-  //     D4: {target: true, miss: false, hit: false},
-  //     D5: {target: false, miss: false, hit: false},
-  //     D6: {target: false, miss: false, hit: false},
-  //     D7: {target: false, miss: false, hit: false},
-  //     D8: {target: false, miss: false, hit: false},
-  //   },
-  //   E: {
-  //     E1: {target: false, miss: false, hit: false},
-  //     E2: {target: false, miss: false, hit: false},
-  //     E3: {target: false, miss: false, hit: false},
-  //     E4: {target: false, miss: false, hit: false},
-  //     E5: {target: false, miss: false, hit: false},
-  //     E6: {target: false, miss: false, hit: false},
-  //     E7: {target: true, miss: false, hit: false},
-  //     E8: {target: false, miss: false, hit: false},
-  //   },
-  //   F: {
-  //     F1: {target: false, miss: false, hit: false},
-  //     F2: {target: false, miss: false, hit: false},
-  //     F3: {target: false, miss: false, hit: false},
-  //     F4: {target: true, miss: false, hit: false},
-  //     F5: {target: true, miss: false, hit: false},
-  //     F6: {target: false, miss: false, hit: false},
-  //     F7: {target: true, miss: false, hit: false},
-  //     F8: {target: false, miss: false, hit: false},
-  //   },
-  //   G: {
-  //     G1: {target: false, miss: false, hit: false},
-  //     G2: {target: true, miss: false, hit: false},
-  //     G3: {target: false, miss: false, hit: false},
-  //     G4: {target: false, miss: false, hit: false},
-  //     G5: {target: false, miss: false, hit: false},
-  //     G6: {target: false, miss: false, hit: false},
-  //     G7: {target: true, miss: false, hit: false},
-  //     G8: {target: false, miss: false, hit: false},
-  //   },
-  //   H: {
-  //     H1: {target: false, miss: false, hit: false},
-  //     H2: {target: true, miss: false, hit: false},
-  //     H3: {target: false, miss: false, hit: false},
-  //     H4: {target: false, miss: false, hit: false},
-  //     H5: {target: false, miss: false, hit: false},
-  //     H6: {target: false, miss: false, hit: false},
-  //     H7: {target: true, miss: false, hit: false},
-  //     H8: {target: false, miss: false, hit: false},
-  //   },
-  // };
+  const puzzle = [
+    {value: 'A1', row: 'A', column: 1, target: true, clickType: 'default'},
+    {value: 'A2', row: 'A', column: 2, target: false, clickType: 'default'},
+    {value: 'A3', row: 'A', column: 3, target: true, clickType: 'default'},
+    {value: 'A4', row: 'A', column: 4, target: true, clickType: 'default'},
+    {value: 'A5', row: 'A', column: 5, target: true, clickType: 'default'},
+    {value: 'A6', row: 'A', column: 6, target: false, clickType: 'default'},
+    {value: 'A7', row: 'A', column: 7, target: true, clickType: 'default'},
+    {value: 'A8', row: 'A', column: 8, target: false, clickType: 'default'},
+    {value: 'B1', row: 'B', column: 1, target: true, clickType: 'default'},
+    {value: 'B2', row: 'B', column: 2, target: false, clickType: 'default'},
+    {value: 'B3', row: 'B', column: 3, target: true, clickType: 'default'},
+    {value: 'B4', row: 'B', column: 4, target: true, clickType: 'default'},
+    {value: 'B5', row: 'B', column: 5, target: true, clickType: 'default'},
+    {value: 'B6', row: 'B', column: 6, target: false, clickType: 'default'},
+    {value: 'B7', row: 'B', column: 7, target: true, clickType: 'default'},
+    {value: 'B8', row: 'B', column: 8, target: false, clickType: 'default'},
+    {value: 'C1', row: 'C', column: 1, target: true, clickType: 'default'},
+    {value: 'C2', row: 'C', column: 2, target: false, clickType: 'default'},
+    {value: 'C3', row: 'C', column: 3, target: true, clickType: 'default'},
+    {value: 'C4', row: 'C', column: 4, target: true, clickType: 'default'},
+    {value: 'C5', row: 'C', column: 5, target: true, clickType: 'default'},
+    {value: 'C6', row: 'C', column: 6, target: false, clickType: 'default'},
+    {value: 'C7', row: 'C', column: 7, target: true, clickType: 'default'},
+    {value: 'C8', row: 'C', column: 8, target: false, clickType: 'default'},
+    {value: 'D1', row: 'D', column: 1, target: true, clickType: 'default'},
+    {value: 'D2', row: 'D', column: 2, target: false, clickType: 'default'},
+    {value: 'D3', row: 'D', column: 3, target: true, clickType: 'default'},
+    {value: 'D4', row: 'D', column: 4, target: true, clickType: 'default'},
+    {value: 'D5', row: 'D', column: 5, target: true, clickType: 'default'},
+    {value: 'D6', row: 'D', column: 6, target: false, clickType: 'default'},
+    {value: 'D7', row: 'D', column: 7, target: true, clickType: 'default'},
+    {value: 'D8', row: 'D', column: 8, target: false, clickType: 'default'},
+    {value: 'E1', row: 'E', column: 1, target: true, clickType: 'default'},
+    {value: 'E2', row: 'E', column: 2, target: false, clickType: 'default'},
+    {value: 'E3', row: 'E', column: 3, target: true, clickType: 'default'},
+    {value: 'E4', row: 'E', column: 4, target: true, clickType: 'default'},
+    {value: 'E5', row: 'E', column: 5, target: true, clickType: 'default'},
+    {value: 'E6', row: 'E', column: 6, target: false, clickType: 'default'},
+    {value: 'E7', row: 'E', column: 7, target: true, clickType: 'default'},
+    {value: 'E8', row: 'E', column: 8, target: false, clickType: 'default'},
+    {value: 'F1', row: 'F', column: 1, target: true, clickType: 'default'},
+    {value: 'F2', row: 'F', column: 2, target: false, clickType: 'default'},
+    {value: 'F3', row: 'F', column: 3, target: true, clickType: 'default'},
+    {value: 'F4', row: 'F', column: 4, target: true, clickType: 'default'},
+    {value: 'F5', row: 'F', column: 5, target: true, clickType: 'default'},
+    {value: 'F6', row: 'F', column: 6, target: false, clickType: 'default'},
+    {value: 'F7', row: 'F', column: 7, target: true, clickType: 'default'},
+    {value: 'F8', row: 'F', column: 8, target: false, clickType: 'default'},
+    {value: 'G1', row: 'G', column: 1, target: true, clickType: 'default'},
+    {value: 'G2', row: 'G', column: 2, target: false, clickType: 'default'},
+    {value: 'G3', row: 'G', column: 3, target: true, clickType: 'default'},
+    {value: 'G4', row: 'G', column: 4, target: true, clickType: 'default'},
+    {value: 'G5', row: 'G', column: 5, target: true, clickType: 'default'},
+    {value: 'G6', row: 'G', column: 6, target: false, clickType: 'default'},
+    {value: 'G7', row: 'G', column: 7, target: true, clickType: 'default'},
+    {value: 'G8', row: 'G', column: 8, target: false, clickType: 'default'},
+    {value: 'H1', row: 'H', column: 1, target: true, clickType: 'default'},
+    {value: 'H2', row: 'H', column: 2, target: false, clickType: 'default'},
+    {value: 'H3', row: 'H', column: 3, target: true, clickType: 'default'},
+    {value: 'H4', row: 'H', column: 4, target: true, clickType: 'default'},
+    {value: 'H5', row: 'H', column: 5, target: true, clickType: 'default'},
+    {value: 'H6', row: 'H', column: 6, target: false, clickType: 'default'},
+    {value: 'H7', row: 'H', column: 7, target: true, clickType: 'default'},
+    {value: 'H8', row: 'H', column: 8, target: false, clickType: 'default'},
+  ];
 
-  const puzzle = {
-    A: {
-      A1: {target: true},
-      A2: {target: false},
-      A3: {target: true},
-      A4: {target: true},
-      A5: {target: true},
-      A6: {target: false},
-      A7: {target: true},
-      A8: {target: false},
-    },
-    B: {
-      B1: {target: true},
-      B2: {target: false},
-      B3: {target: false},
-      B4: {target: false},
-      B5: {target: false},
-      B6: {target: false},
-      B7: {target: true},
-      B8: {target: false},
-    },
-    C: {
-      C1: {target: false},
-      C2: {target: false},
-      C3: {target: false},
-      C4: {target: false},
-      C5: {target: false},
-      C6: {target: false},
-      C7: {target: true},
-      C8: {target: false},
-    },
-    D: {
-      D1: {target: true},
-      D2: {target: true},
-      D3: {target: true},
-      D4: {target: true},
-      D5: {target: false},
-      D6: {target: false},
-      D7: {target: false},
-      D8: {target: false},
-    },
-    E: {
-      E1: {target: false},
-      E2: {target: false},
-      E3: {target: false},
-      E4: {target: false},
-      E5: {target: false},
-      E6: {target: false},
-      E7: {target: true},
-      E8: {target: false},
-    },
-    F: {
-      F1: {target: false},
-      F2: {target: false},
-      F3: {target: false},
-      F4: {target: true},
-      F5: {target: true},
-      F6: {target: false},
-      F7: {target: true},
-      F8: {target: false},
-    },
-    G: {
-      G1: {target: false},
-      G2: {target: true},
-      G3: {target: false},
-      G4: {target: false},
-      G5: {target: false},
-      G6: {target: false},
-      G7: {target: true},
-      G8: {target: false},
-    },
-    H: {
-      H1: {target: false},
-      H2: {target: true},
-      H3: {target: false},
-      H4: {target: false},
-      H5: {target: false},
-      H6: {target: false},
-      H7: {target: true},
-      H8: {target: false},
-    },
-  };
+  const puzzleRowA = [
+    {value: 'A1', row: 'A', column: 1, target: true, clickType: 'default'},
+    {value: 'A2', row: 'A', column: 2, target: false, clickType: 'default'},
+    {value: 'A3', row: 'A', column: 3, target: true, clickType: 'default'},
+    {value: 'A4', row: 'A', column: 4, target: true, clickType: 'default'},
+    {value: 'A5', row: 'A', column: 5, target: true, clickType: 'default'},
+    {value: 'A6', row: 'A', column: 6, target: false, clickType: 'default'},
+    {value: 'A7', row: 'A', column: 7, target: true, clickType: 'default'},
+    {value: 'A8', row: 'A', column: 8, target: false, clickType: 'default'},
+  ];
+
+  const puzzleRowB = [
+    {value: 'B1', row: 'B', column: 1, target: true, clickType: 'default'},
+    {value: 'B2', row: 'B', column: 2, target: false, clickType: 'default'},
+    {value: 'B3', row: 'B', column: 3, target: true, clickType: 'default'},
+    {value: 'B4', row: 'B', column: 4, target: true, clickType: 'default'},
+    {value: 'B5', row: 'B', column: 5, target: true, clickType: 'default'},
+    {value: 'B6', row: 'B', column: 6, target: false, clickType: 'default'},
+    {value: 'B7', row: 'B', column: 7, target: true, clickType: 'default'},
+    {value: 'B8', row: 'B', column: 8, target: false, clickType: 'default'},
+  ];
+
+  const puzzleRowC = [
+    {value: 'C1', row: 'C', column: 1, target: true, clickType: 'default'},
+    {value: 'C2', row: 'C', column: 2, target: false, clickType: 'default'},
+    {value: 'C3', row: 'C', column: 3, target: true, clickType: 'default'},
+    {value: 'C4', row: 'C', column: 4, target: true, clickType: 'default'},
+    {value: 'C5', row: 'C', column: 5, target: true, clickType: 'default'},
+    {value: 'C6', row: 'C', column: 6, target: false, clickType: 'default'},
+    {value: 'C7', row: 'C', column: 7, target: true, clickType: 'default'},
+    {value: 'C8', row: 'C', column: 8, target: false, clickType: 'default'},
+  ];
+
+  const puzzleRowD = [
+    {value: 'D1', row: 'D', column: 1, target: true, clickType: 'default'},
+    {value: 'D2', row: 'D', column: 2, target: false, clickType: 'default'},
+    {value: 'D3', row: 'D', column: 3, target: true, clickType: 'default'},
+    {value: 'D4', row: 'D', column: 4, target: true, clickType: 'default'},
+    {value: 'D5', row: 'D', column: 5, target: true, clickType: 'default'},
+    {value: 'D6', row: 'D', column: 6, target: false, clickType: 'default'},
+    {value: 'D7', row: 'D', column: 7, target: true, clickType: 'default'},
+    {value: 'D8', row: 'D', column: 8, target: false, clickType: 'default'},
+  ];
+
+  const puzzleRowE = [
+    {value: 'E1', row: 'E', column: 1, target: true, clickType: 'default'},
+    {value: 'E2', row: 'E', column: 2, target: false, clickType: 'default'},
+    {value: 'E3', row: 'E', column: 3, target: true, clickType: 'default'},
+    {value: 'E4', row: 'E', column: 4, target: true, clickType: 'default'},
+    {value: 'E5', row: 'E', column: 5, target: true, clickType: 'default'},
+    {value: 'E6', row: 'E', column: 6, target: false, clickType: 'default'},
+    {value: 'E7', row: 'E', column: 7, target: true, clickType: 'default'},
+    {value: 'E8', row: 'E', column: 8, target: false, clickType: 'default'},
+  ];
+
+  const puzzleRowF = [
+    {value: 'F1', row: 'F', column: 1, target: true, clickType: 'default'},
+    {value: 'F2', row: 'F', column: 2, target: false, clickType: 'default'},
+    {value: 'F3', row: 'F', column: 3, target: true, clickType: 'default'},
+    {value: 'F4', row: 'F', column: 4, target: true, clickType: 'default'},
+    {value: 'F5', row: 'F', column: 5, target: true, clickType: 'default'},
+    {value: 'F6', row: 'F', column: 6, target: false, clickType: 'default'},
+    {value: 'F7', row: 'F', column: 7, target: true, clickType: 'default'},
+    {value: 'F8', row: 'F', column: 8, target: false, clickType: 'default'},
+  ];
+
+  const puzzleRowG = [
+    {value: 'G1', row: 'G', column: 1, target: true, clickType: 'default'},
+    {value: 'G2', row: 'G', column: 2, target: false, clickType: 'default'},
+    {value: 'G3', row: 'G', column: 3, target: true, clickType: 'default'},
+    {value: 'G4', row: 'G', column: 4, target: true, clickType: 'default'},
+    {value: 'G5', row: 'G', column: 5, target: true, clickType: 'default'},
+    {value: 'G6', row: 'G', column: 6, target: false, clickType: 'default'},
+    {value: 'G7', row: 'G', column: 7, target: true, clickType: 'default'},
+    {value: 'G8', row: 'G', column: 8, target: false, clickType: 'default'},
+  ];
+
+  const puzzleRowH = [
+    {value: 'H1', row: 'H', column: 1, target: true, clickType: 'default'},
+    {value: 'H2', row: 'H', column: 2, target: false, clickType: 'default'},
+    {value: 'H3', row: 'H', column: 3, target: true, clickType: 'default'},
+    {value: 'H4', row: 'H', column: 4, target: true, clickType: 'default'},
+    {value: 'H5', row: 'H', column: 5, target: true, clickType: 'default'},
+    {value: 'H6', row: 'H', column: 6, target: false, clickType: 'default'},
+    {value: 'H7', row: 'H', column: 7, target: true, clickType: 'default'},
+    {value: 'H8', row: 'H', column: 8, target: false, clickType: 'default'},
+  ];
 
   // const [isHit, setIsHit] = useState(hit);
   // const [isMiss, setIsMiss] = useState(miss);
 
+  const [cellValue, setCellValue] = useState('');
   const [clickType, setClickType] = useState('default');
 
-  const getClickValue = (value: string) => {
-    setClickType(value);
+  const targets = ['all targs'];
+  /* If targets, then win */
+
+  const setChooseCell = (cellVal: string, cellType: string) => {
+    const cell = puzzle.find(cell => cell.value === cellVal) ?? {
+      value: '',
+      row: '',
+      target: null,
+      clickType: '',
+    };
+    cell.clickType = cellType;
+  };
+
+  const getClickValue = (cellValue: string, clickType: string) => {
+    setChooseCell(cellValue, clickType);
+    setCellValue(cellValue);
+    setClickType(clickType);
   };
 
   return (
@@ -260,411 +265,99 @@ function App(): React.JSX.Element {
                 </View>
             ))} */}
           <View style={styles.flexrow_container}>
-            <Cell
-              cellValue={puzzle.A.A1.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.A.A2.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.A.A3.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.A.A4.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.A.A5.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.A.A6.target}
-              target={false}
-              clickType="miss"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.A.A7.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.A.A8.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
+            {puzzleRowA.map((cell, key) => (
+              <Cell
+                key={key}
+                cellValue={cell.value}
+                target={cell.target}
+                clickType={cell.clickType}
+                valueCallback={getClickValue}
+              />
+            ))}
           </View>
 
           <View style={styles.flexrow_container}>
-            <Cell
-              cellValue={puzzle.B.B1.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.B.B2.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.B.B3.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.B.B4.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.B.B5.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.B.B6.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.B.B7.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.B.B8.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
+            {puzzleRowB.map((cell, key) => (
+              <Cell
+                key={key}
+                cellValue={cell.value}
+                target={cell.target}
+                clickType={cell.clickType}
+                valueCallback={getClickValue}
+              />
+            ))}
           </View>
 
           <View style={styles.flexrow_container}>
-            <Cell
-              cellValue={puzzle.C.C1.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.C.C2.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.C.C3.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.C.C4.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.C.C5.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.C.C6.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.C.C7.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.C.C8.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
+            {puzzleRowC.map((cell, key) => (
+              <Cell
+                key={key}
+                cellValue={cell.value}
+                target={cell.target}
+                clickType={cell.clickType}
+                valueCallback={getClickValue}
+              />
+            ))}
           </View>
 
           <View style={styles.flexrow_container}>
-            <Cell
-              cellValue={puzzle.D.D1.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.D.D2.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.D.D3.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.D.D4.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.D.D5.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.D.D6.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.D.D7.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.D.D8.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
+            {puzzleRowD.map((cell, key) => (
+              <Cell
+                key={key}
+                cellValue={cell.value}
+                target={cell.target}
+                clickType={cell.clickType}
+                valueCallback={getClickValue}
+              />
+            ))}
           </View>
 
           <View style={styles.flexrow_container}>
-            <Cell
-              cellValue={puzzle.E.E1.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.E.E2.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.E.E3.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.E.E4.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.E.E5.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.E.E6.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.E.E7.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.E.E8.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
+            {puzzleRowE.map((cell, key) => (
+              <Cell
+                key={key}
+                cellValue={cell.value}
+                target={cell.target}
+                clickType={cell.clickType}
+                valueCallback={getClickValue}
+              />
+            ))}
           </View>
 
           <View style={styles.flexrow_container}>
-            <Cell
-              cellValue={puzzle.F.F1.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.F.F2.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.F.F3.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.F.F4.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.F.F5.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.F.F6.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.F.F7.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.F.F8.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
+            {puzzleRowF.map((cell, key) => (
+              <Cell
+                key={key}
+                cellValue={cell.value}
+                target={cell.target}
+                clickType={cell.clickType}
+                valueCallback={getClickValue}
+              />
+            ))}
           </View>
 
           <View style={styles.flexrow_container}>
-            <Cell
-              cellValue={puzzle.G.G1.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.G.G2.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.G.G3.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.G.G4.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.G.G5.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.G.G6.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.G.G7.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.G.G8.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
+            {puzzleRowG.map((cell, key) => (
+              <Cell
+                key={key}
+                cellValue={cell.value}
+                target={cell.target}
+                clickType={cell.clickType}
+                valueCallback={getClickValue}
+              />
+            ))}
           </View>
 
           <View style={styles.flexrow_container}>
-            <Cell
-              cellValue={puzzle.H.H1.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.H.H2.target}
-              target={false}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.H.H3.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.H.H4.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.H.H5.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.H.H6.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.H.H7.target}
-              target={true}
-              clickType="hit"
-              valueCallback={getClickValue}
-            />
-            <Cell
-              cellValue={puzzle.H.H8.target}
-              target={false}
-              clickType="default"
-              valueCallback={getClickValue}
-            />
+            {puzzleRowH.map((cell, key) => (
+              <Cell
+                key={key}
+                cellValue={cell.value}
+                target={cell.target}
+                clickType={cell.clickType}
+                valueCallback={getClickValue}
+              />
+            ))}
           </View>
           <View>
             <Button title="Hit"></Button>
