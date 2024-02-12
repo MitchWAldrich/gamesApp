@@ -5,16 +5,16 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCircle} from '@fortawesome/free-solid-svg-icons/faCircle';
 
 export type CellProps = {
-  cellValue: boolean;
-  target: boolean;
+  cellValue: string;
   clickType: string;
-  valueCallback: (value: string) => void;
+  target: boolean;
+  valueCallback: (cellValue: string, cellType: string) => void;
 };
 
 const Cell: React.FC<CellProps> = ({
   cellValue,
-  target = false,
   clickType = 'default',
+  target = false,
   valueCallback,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
