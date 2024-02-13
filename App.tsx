@@ -215,6 +215,7 @@ function App(): React.JSX.Element {
 
   const [cellValue, setCellValue] = useState('');
   const [clickType, setClickType] = useState('default');
+  console.log('clickType', clickType);
 
   const targets = ['all targs'];
   /* If targets, then win */
@@ -230,6 +231,7 @@ function App(): React.JSX.Element {
   };
 
   const getClickValue = (cellValue: string, clickType: string) => {
+    console.log('clicked:', cellValue, clickType);
     setChooseCell(cellValue, clickType);
     setCellValue(cellValue);
     setClickType(clickType);
@@ -270,7 +272,7 @@ function App(): React.JSX.Element {
                 key={key}
                 cellValue={cell.value}
                 target={cell.target}
-                clickType={cell.clickType}
+                clickType={clickType}
                 valueCallback={getClickValue}
               />
             ))}
@@ -282,7 +284,7 @@ function App(): React.JSX.Element {
                 key={key}
                 cellValue={cell.value}
                 target={cell.target}
-                clickType={cell.clickType}
+                clickType={clickType}
                 valueCallback={getClickValue}
               />
             ))}
@@ -294,7 +296,7 @@ function App(): React.JSX.Element {
                 key={key}
                 cellValue={cell.value}
                 target={cell.target}
-                clickType={cell.clickType}
+                clickType={clickType}
                 valueCallback={getClickValue}
               />
             ))}
@@ -306,7 +308,7 @@ function App(): React.JSX.Element {
                 key={key}
                 cellValue={cell.value}
                 target={cell.target}
-                clickType={cell.clickType}
+                clickType={clickType}
                 valueCallback={getClickValue}
               />
             ))}
@@ -318,7 +320,7 @@ function App(): React.JSX.Element {
                 key={key}
                 cellValue={cell.value}
                 target={cell.target}
-                clickType={cell.clickType}
+                clickType={clickType}
                 valueCallback={getClickValue}
               />
             ))}
@@ -330,7 +332,7 @@ function App(): React.JSX.Element {
                 key={key}
                 cellValue={cell.value}
                 target={cell.target}
-                clickType={cell.clickType}
+                clickType={clickType}
                 valueCallback={getClickValue}
               />
             ))}
@@ -342,7 +344,7 @@ function App(): React.JSX.Element {
                 key={key}
                 cellValue={cell.value}
                 target={cell.target}
-                clickType={cell.clickType}
+                clickType={clickType}
                 valueCallback={getClickValue}
               />
             ))}
@@ -354,14 +356,22 @@ function App(): React.JSX.Element {
                 key={key}
                 cellValue={cell.value}
                 target={cell.target}
-                clickType={cell.clickType}
+                clickType={clickType}
                 valueCallback={getClickValue}
               />
             ))}
           </View>
           <View>
-            <Button title="Hit"></Button>
-            <Button title="Miss"></Button>
+            <Button
+              title="Hit"
+              onPress={() =>
+                setClickType(clickType === 'default' ? 'hit' : 'default')
+              }></Button>
+            <Button
+              title="Miss"
+              onPress={() =>
+                setClickType(clickType === 'default' ? 'miss' : 'default')
+              }></Button>
           </View>
         </View>
       </ScrollView>
