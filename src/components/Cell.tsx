@@ -17,14 +17,14 @@ const Cell: React.FC<CellProps> = ({
   target = false,
   valueCallback,
 }) => {
-  const [isPressed, setIsPressed] = useState(false);
+  // const [isPressed, setIsPressed] = useState(false);
 
-  const hitOrMiss = (clickType: string) => {
-    setIsPressed(true);
-  };
+  // const hitOrMiss = (clickType: string) => {
+  //   setIsPressed(true);
+  // };
 
   return (
-    <Pressable onPress={() => hitOrMiss}>
+    <Pressable onPress={() => valueCallback(cellValue, clickType)}>
       {clickType === 'default' && <View style={styles.cell}></View>}
       {clickType === 'hit' && (
         <View style={styles.cell}>
