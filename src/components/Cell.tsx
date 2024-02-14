@@ -1,44 +1,46 @@
 import {useState} from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Button, Pressable, StyleSheet, Text, View} from 'react-native';
+import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCircle} from '@fortawesome/free-solid-svg-icons/faCircle';
 
 export type CellProps = {
-  cellValue: string;
+  cellObj: {
+    id: string;
+    value: string;
+    row: string;
+    column: number | null;
+    target: boolean | null;
+    clickType: string;
+  };
   clickType: string;
-  target: boolean;
-  valueCallback: (cellValue: string, cellType: string) => void;
+  // valueCallback: (cellValue: string, clickType: string) => void;
 };
 
-const Cell: React.FC<CellProps> = ({
-  cellValue,
-  clickType = 'default',
-  target = false,
-  valueCallback,
-}) => {
-  // const [isPressed, setIsPressed] = useState(false);
+const Cell: React.FC<CellProps> = ({cellObj, clickType}) => {
+  const [cellType, setCellType] = useState(cellObj.clickType);
+  const [isPressed, setIsPressed] = useState(false);
 
-  // const hitOrMiss = (clickType: string) => {
-  //   setIsPressed(true);
-  // };
+  const targets = ['all targs'];
+  /* If targets, then win */
 
-  return (
-    <Pressable onPress={() => valueCallback(cellValue, clickType)}>
-      {clickType === 'default' && <View style={styles.cell}></View>}
-      {clickType === 'hit' && (
-        <View style={styles.cell}>
-          <FontAwesomeIcon icon={faCircle} />
-        </View>
-      )}
-      {clickType === 'miss' && <View style={styles.miss}></View>}
-    </Pressable>
-  );
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      backgroundColor: cellObj.clickType === 'miss' ? 'green' : 'white',
+    };
+  });
+
+  const handlePress = () => {
+    setIsPressed(!isPressed);
+    // valueCallback(cellObj.value, clickType);
+  };
+
+  return <Animated.View style={[styles.cell, animatedStyles]}></Animated.View>;
 };
 
 const styles = StyleSheet.create({
   top_container: {
-    // paddingTop: Constants.statusBarHeight,
     backgroundColor: 'red',
   },
   flexrow_container: {
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cell: {
-    backgroundColor: '#ebedf0',
+    // backgroundColor: '#ebedf0',
     height: 20,
     width: 20,
     margin: 5,
