@@ -15,26 +15,40 @@ export type CellProps = {
     clickType: string;
   };
   clickType: string;
+  pressed: boolean;
+  hitArray: string[];
+  missArray: string[];
   // valueCallback: (cellValue: string, clickType: string) => void;
 };
 
-const Cell: React.FC<CellProps> = ({cellObj, clickType}) => {
+const Cell: React.FC<CellProps> = ({
+  cellObj,
+  clickType,
+  pressed,
+  hitArray,
+  missArray,
+}) => {
   const [cellType, setCellType] = useState(cellObj.clickType);
-  const [isPressed, setIsPressed] = useState(false);
+  const [isPressed, setIsPressed] = useState(!pressed ?? false);
+
+  console.log('cell', cellObj);
+  console.log('isPressed', isPressed);
 
   const targets = ['all targs'];
   /* If targets, then win */
 
   const animatedStyles = useAnimatedStyle(() => {
+    console.log('animatedStyles', cellObj.clickType);
     return {
-      backgroundColor: cellObj.clickType === 'miss' ? 'green' : 'white',
+      // backgroundColor: cellObj.clickType === 'miss' ? 'green' : 'white',
+      backgroundColor: missArray.includes(cellObj.id) ? 'green' : 'white',
     };
   });
 
-  const handlePress = () => {
-    setIsPressed(!isPressed);
-    // valueCallback(cellObj.value, clickType);
-  };
+  // const handlePress = () => {
+  //   setIsPressed(!isPressed);
+  //   // valueCallback(cellObj.value, clickType);
+  // };
 
   return <Animated.View style={[styles.cell, animatedStyles]}></Animated.View>;
 };

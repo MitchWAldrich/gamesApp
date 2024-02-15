@@ -18,32 +18,44 @@ export type BoardProps = {
 const Board: React.FC<BoardProps> = ({puzzle}) => {
   const [currentPuzzle, setCurrentPuzzle] = useState(puzzle);
   const [clickType, setClickType] = useState('default');
+  const [isPressed, setIsPressed] = useState(false);
+  const [hitArray, setHitArray] = useState(['']);
+  const [missArray, setMissArray] = useState(['']);
 
   const toggleItemSelect = (clickType: string, id: number) => {
-    const cellIndex = currentPuzzle.findIndex(
-      cell => cell.id === id.toString(),
-    );
+    if (clickType === 'hit') {
+      const newArray = [];
+      newArray.push(id.toString());
+      setHitArray(newArray);
+    }
+    if (clickType === 'miss') hitArray.push(id);
 
-    const cell = {
-      id: currentPuzzle[cellIndex].id,
-      value: currentPuzzle[cellIndex].value,
-      row: currentPuzzle[cellIndex].row,
-      column: currentPuzzle[cellIndex].column,
-      target: currentPuzzle[cellIndex].target,
-      clickType: clickType,
-    };
+    // setIsPressed(true);
+    // const cellIndex = currentPuzzle.findIndex(
+    //   cell => cell.id === id.toString(),
+    // );
 
-    cell.clickType = clickType;
-    currentPuzzle.splice(cellIndex, 1, cell);
-    const updatedPuzzle = currentPuzzle.splice(cellIndex, 1, cell);
+    // const cell = {
+    //   id: currentPuzzle[cellIndex].id,
+    //   value: currentPuzzle[cellIndex].value,
+    //   row: currentPuzzle[cellIndex].row,
+    //   column: currentPuzzle[cellIndex].column,
+    //   target: currentPuzzle[cellIndex].target,
+    //   clickType: clickType,
+    // };
 
-    setCurrentPuzzle(updatedPuzzle);
+    // currentPuzzle.splice(cellIndex, 1, cell);
+    // console.log('updatedPuzzle', currentPuzzle);
+    // const updatedPuzzle = currentPuzzle;
+
+    // setCurrentPuzzle(updatedPuzzle);
   };
 
   const targets = ['all targs'];
   /* If targets, then win */
 
   const puzzleRowA = currentPuzzle.filter(cell => cell.row === 'A');
+  console.log('****PUZZLEROWA', puzzleRowA);
   const puzzleRowB = currentPuzzle.filter(cell => cell.row === 'B');
   const puzzleRowC = currentPuzzle.filter(cell => cell.row === 'C');
   const puzzleRowD = currentPuzzle.filter(cell => cell.row === 'D');
@@ -63,6 +75,9 @@ const Board: React.FC<BoardProps> = ({puzzle}) => {
                 <Cell
                   cellObj={item}
                   clickType={clickType}
+                  pressed={isPressed}
+                  hitArray={hitArray}
+                  missArray={missArray}
                   // valueCallback={getClickValue}
                 />
               </Pressable>
