@@ -1,84 +1,67 @@
 import {useState} from 'react';
 
-import {Button, FlatList, Pressable, StyleSheet, View} from 'react-native';
+import {FlatList, Pressable, StyleSheet, View} from 'react-native';
 
+import {BoardProps} from '../utils/types';
+
+import Button from './Button';
 import Cell from './Cell';
 
-export type BoardProps = {
-  puzzle: {
-    id: string;
-    value: string;
-    row: string;
-    column: number | null;
-    target: boolean | null;
-    clickType: string;
-  }[];
-};
+import {removeStringItemFromArray} from '../utils/helpers';
+import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 
 const Board: React.FC<BoardProps> = ({puzzle}) => {
   const [currentPuzzle, setCurrentPuzzle] = useState(puzzle);
   const [clickType, setClickType] = useState('default');
-  const [isPressed, setIsPressed] = useState(false);
-  const [hitArray, setHitArray] = useState(['']);
-  const [missArray, setMissArray] = useState(['']);
+  const [hitArray, setHitArray] = useState<string[]>([]);
+  const [missArray, setMissArray] = useState<string[]>([]);
 
   const toggleItemSelect = (clickType: string, id: number) => {
     if (clickType === 'hit') {
-      const newArray = [];
-      newArray.push(id.toString());
+      const newArray = [...hitArray];
+      newArray.includes(id.toString())
+        ? removeStringItemFromArray(newArray, id.toString())
+        : newArray.push(id.toString());
       setHitArray(newArray);
     }
-    if (clickType === 'miss') hitArray.push(id);
-
-    // setIsPressed(true);
-    // const cellIndex = currentPuzzle.findIndex(
-    //   cell => cell.id === id.toString(),
-    // );
-
-    // const cell = {
-    //   id: currentPuzzle[cellIndex].id,
-    //   value: currentPuzzle[cellIndex].value,
-    //   row: currentPuzzle[cellIndex].row,
-    //   column: currentPuzzle[cellIndex].column,
-    //   target: currentPuzzle[cellIndex].target,
-    //   clickType: clickType,
-    // };
-
-    // currentPuzzle.splice(cellIndex, 1, cell);
-    // console.log('updatedPuzzle', currentPuzzle);
-    // const updatedPuzzle = currentPuzzle;
-
-    // setCurrentPuzzle(updatedPuzzle);
+    if (clickType === 'miss') {
+      const newArray = [...missArray];
+      newArray.includes(id.toString())
+        ? removeStringItemFromArray(newArray, id.toString())
+        : newArray.push(id.toString());
+      setMissArray(newArray);
+    }
   };
 
   const targets = ['all targs'];
   /* If targets, then win */
 
-  const puzzleRowA = currentPuzzle.filter(cell => cell.row === 'A');
-  console.log('****PUZZLEROWA', puzzleRowA);
-  const puzzleRowB = currentPuzzle.filter(cell => cell.row === 'B');
-  const puzzleRowC = currentPuzzle.filter(cell => cell.row === 'C');
-  const puzzleRowD = currentPuzzle.filter(cell => cell.row === 'D');
-  const puzzleRowE = currentPuzzle.filter(cell => cell.row === 'E');
-  const puzzleRowF = currentPuzzle.filter(cell => cell.row === 'F');
-  const puzzleRowG = currentPuzzle.filter(cell => cell.row === 'G');
-  const puzzleRowH = currentPuzzle.filter(cell => cell.row === 'H');
+  const setHit = () => {
+    setClickType(clickType === 'hit' ? 'default' : 'hit');
+  };
+
+  const setMiss = () => {
+    setClickType(clickType === 'miss' ? 'default' : 'miss');
+  };
+
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      backgroundColor: clickType === 'hit' ? 'green' : 'white',
+    };
+  });
 
   return (
     <>
       <View style={styles.flexrow_container}>
         <View style={styles.game_board}>
           <FlatList
-            data={puzzle}
+            data={currentPuzzle}
             renderItem={({item, index}) => (
               <Pressable onPress={() => toggleItemSelect(clickType, index + 1)}>
                 <Cell
                   cellObj={item}
-                  clickType={clickType}
-                  pressed={isPressed}
                   hitArray={hitArray}
                   missArray={missArray}
-                  // valueCallback={getClickValue}
                 />
               </Pressable>
             )}
@@ -89,16 +72,12 @@ const Board: React.FC<BoardProps> = ({puzzle}) => {
         </View>
       </View>
       <View>
-        <Button
-          title="Hit"
-          onPress={() =>
-            setClickType(clickType === 'default' ? 'hit' : 'default')
-          }></Button>
-        <Button
-          title="Miss"
-          onPress={() =>
-            setClickType(clickType === 'default' ? 'miss' : 'default')
-          }></Button>
+        <Animated.View style={[animatedStyles]}>
+          <Button title="Hit" onPress={() => setHit()} color="green"></Button>
+        </Animated.View>
+        <Animated.View style={[animatedStyles]}>
+          <Button title="Miss" onPress={() => setMiss()} color="red"></Button>
+        </Animated.View>
       </View>
     </>
   );
@@ -125,22 +104,3 @@ const styles = StyleSheet.create({
 });
 
 export default Board;
-
-/*
-  puzzleArray: {
-    id: string;
-    value: string;
-    row: string;
-    column: number | null;
-    target: boolean | null;
-    clickType: string;
-  }[],
-  newCell: {
-    id: string;
-    value: string;
-    row: string;
-    column: number | null;
-    target: boolean | null;
-    clickType: string;
-  },
-  */
