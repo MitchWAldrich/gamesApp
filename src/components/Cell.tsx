@@ -1,32 +1,48 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCircle} from '@fortawesome/free-solid-svg-icons/faCircle';
 
-export type CellProps = {
-  cellObj: {
-    id: string;
-    value: string;
-    row: string;
-    column: number | null;
-    target: boolean | null;
-    clickType: string;
-  };
-  hitArray: string[];
-  missArray: string[];
-};
+import {CellProps} from '../utils/types';
 
-const Cell: React.FC<CellProps> = ({cellObj, hitArray, missArray}) => {
+const Cell: React.FC<CellProps> = ({
+  cellObj,
+  hitArray,
+  missArray,
+  columns,
+  rows,
+}) => {
+  const setLabel = (cellValue: string) => {
+    let label: number | null = null;
+
+    if (cellObj.column === 1 && cellValue !== 'A1') {
+      label = rows?.length ? rows[cellObj.row - 2]?.length : 0;
+    }
+
+    if (cellObj.row === 1 && cellValue !== 'A1') {
+      label = columns?.length ? columns[(cellObj.column ?? 0) - 2]?.length : 0;
+    }
+
+    return label;
+  };
+
   const animatedStyles = useAnimatedStyle(() => {
     return {
-      backgroundColor: missArray.includes(cellObj.id) ? 'red' : 'white',
+      backgroundColor: missArray.includes(cellObj.id)
+        ? 'red'
+        : cellObj.isLabel === true
+        ? ''
+        : 'white',
     };
   });
 
   return (
     <Animated.View style={[styles.cell, animatedStyles]}>
-      {hitArray.includes(cellObj.id) && <FontAwesomeIcon icon={faCircle} />}
+      {cellObj.isLabel && <Text>{setLabel(cellObj.value)}</Text>}
+      {hitArray && hitArray.includes(cellObj.id) && (
+        <FontAwesomeIcon icon={faCircle} />
+      )}
     </Animated.View>
   );
 };
