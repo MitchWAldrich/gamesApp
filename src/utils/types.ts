@@ -1,12 +1,5 @@
 export type BoardProps = {
-  puzzle: {
-    id: string;
-    value: string;
-    row: string;
-    column: number | null;
-    target: boolean | null;
-    clickType: string;
-  }[];
+  puzzle: cellObject[];
 };
 
 export type ButtonProps = {
@@ -18,10 +11,18 @@ export type ButtonProps = {
   loading?: boolean;
 };
 
+export type CellProps = {
+  cellObj: cellObject;
+  hitArray?: string[];
+  missArray: string[];
+  columns?: cellObject[][];
+  rows?: cellObject[][];
+};
+
 export type puzzleArray = {
     id: string;
     value: string;
-    row: string;
+    row: number;
     column: number | null;
     target: boolean | null;
     clickType: string;
@@ -30,8 +31,10 @@ export type puzzleArray = {
 export type cellObject = {
   id: string;
   value: string;
-  row: string;
+  row: number;
   column: number | null;
   target: boolean | null;
   clickType: string;
+  isLabel?: boolean | null;
+  label?: string | null;
 }
