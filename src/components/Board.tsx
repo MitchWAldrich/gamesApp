@@ -83,8 +83,6 @@ const Board: React.FC<BoardProps> = ({puzzle}) => {
               </Pressable>
             )}
             numColumns={8}
-            // horizontal
-            // keyExtractor={item => item.id}
           />
         </View>
       </View>
