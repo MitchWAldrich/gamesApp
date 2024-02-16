@@ -27,7 +27,7 @@ export type puzzleArray = {
     clickType: string;
   }[];
 
-export type cell = {
+export type cellObject = {
   id: string;
   value: string;
   row: string;

@@ -3,3 +3,7 @@ export const removeStringItemFromArray = (array: string[], id: string) => {
   array.splice(index, 1);
   return array;
 };
+
+export const sortNumbers = (numStringArray: string[]) => {
+  return numStringArray.sort((a, b) => Number(a) - Number(b));
+};
