@@ -1,40 +1,63 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
-import {FlatList, Pressable, StyleSheet, View} from 'react-native';
+import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 
-import {BoardProps} from '../utils/types';
+import {BoardProps, cellObject, puzzleArray} from '../utils/types';
 
 import Button from './Button';
 import Cell from './Cell';
 
-import {removeStringItemFromArray} from '../utils/helpers';
-import Animated, {useAnimatedStyle} from 'react-native-reanimated';
+import {removeStringItemFromArray, sortNumbers} from '../utils/helpers';
 
 const Board: React.FC<BoardProps> = ({puzzle}) => {
-  const [currentPuzzle, setCurrentPuzzle] = useState(puzzle);
-  const [clickType, setClickType] = useState('default');
+  const [currentPuzzle, setCurrentPuzzle] = useState<puzzleArray>(puzzle);
+  const [clickType, setClickType] = useState<string>('default');
   const [hitArray, setHitArray] = useState<string[]>([]);
   const [missArray, setMissArray] = useState<string[]>([]);
 
   const toggleItemSelect = (clickType: string, id: number) => {
     if (clickType === 'hit') {
       const newArray = [...hitArray];
+
       newArray.includes(id.toString())
         ? removeStringItemFromArray(newArray, id.toString())
         : newArray.push(id.toString());
+
+      sortNumbers(newArray);
+
       setHitArray(newArray);
     }
+
     if (clickType === 'miss') {
       const newArray = [...missArray];
+
       newArray.includes(id.toString())
         ? removeStringItemFromArray(newArray, id.toString())
         : newArray.push(id.toString());
+
       setMissArray(newArray);
     }
   };
 
-  const targets = ['all targs'];
-  /* If targets, then win */
+  useEffect(() => {
+    if (JSON.stringify(targetIds) === JSON.stringify(hitArray))
+      setIsPuzzleComplete(true);
+  }, [hitArray]);
+
+  const getTargetIds = (puzzle: puzzleArray) => {
+    const targetsArray: string[] = [];
+    const targetObjects = puzzle.filter(
+      (cell: cellObject) => cell.target === true,
+    );
+    targetObjects.forEach((cell: cellObject) => targetsArray.push(cell.id));
+    sortNumbers(targetsArray);
+
+    return targetsArray;
+  };
+
+  const targetIds = getTargetIds(currentPuzzle);
+
+  const [isPuzzleComplete, setIsPuzzleComplete] = useState<boolean>(false);
 
   const setHit = () => {
     setClickType(clickType === 'hit' ? 'default' : 'hit');
@@ -43,12 +66,6 @@ const Board: React.FC<BoardProps> = ({puzzle}) => {
   const setMiss = () => {
     setClickType(clickType === 'miss' ? 'default' : 'miss');
   };
-
-  const animatedStyles = useAnimatedStyle(() => {
-    return {
-      backgroundColor: clickType === 'hit' ? 'green' : 'white',
-    };
-  });
 
   return (
     <>
@@ -72,13 +89,18 @@ const Board: React.FC<BoardProps> = ({puzzle}) => {
         </View>
       </View>
       <View>
-        <Animated.View style={[animatedStyles]}>
+        <View>
           <Button title="Hit" onPress={() => setHit()} color="green"></Button>
-        </Animated.View>
-        <Animated.View style={[animatedStyles]}>
+        </View>
+        <View>
           <Button title="Miss" onPress={() => setMiss()} color="red"></Button>
-        </Animated.View>
+        </View>
       </View>
+      {isPuzzleComplete && (
+        <View style={styles.win_container}>
+          <Text style={styles.win_text}>You Win!</Text>
+        </View>
+      )}
     </>
   );
 };
@@ -100,6 +122,14 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  win_container: {
+    alignItems: 'center',
+    marginTop: 25,
+  },
+  win_text: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
 
