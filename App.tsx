@@ -1,6 +1,5 @@
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   useColorScheme,
@@ -17,7 +16,21 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  // const [puzzle, setPuzzle] = useState(JSON.parse(JSON.stringify(initialPuzzle)))
+  // const [puzzle, setPuzzle] = useState();
+
+  const validateGame = (targetArrays: number[][]) => {
+    targets.length === 7;
+  };
+
+  const targets: number[][] = [
+    [1, 9],
+    [44, 45],
+    [50, 58],
+    [3, 4, 5],
+    [7, 15, 23],
+    [25, 26, 27, 28],
+    [39, 47, 55, 63],
+  ];
 
   const puzzle = [
     {
@@ -105,7 +118,7 @@ function App(): React.JSX.Element {
       value: 'B3',
       row: 'B',
       column: 3,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -113,7 +126,7 @@ function App(): React.JSX.Element {
       value: 'B4',
       row: 'B',
       column: 4,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -121,7 +134,7 @@ function App(): React.JSX.Element {
       value: 'B5',
       row: 'B',
       column: 5,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -153,7 +166,7 @@ function App(): React.JSX.Element {
       value: 'C1',
       row: 'C',
       column: 1,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -169,7 +182,7 @@ function App(): React.JSX.Element {
       value: 'C3',
       row: 'C',
       column: 3,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -177,7 +190,7 @@ function App(): React.JSX.Element {
       value: 'C4',
       row: 'C',
       column: 4,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -185,7 +198,7 @@ function App(): React.JSX.Element {
       value: 'C5',
       row: 'C',
       column: 5,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -225,7 +238,7 @@ function App(): React.JSX.Element {
       value: 'D2',
       row: 'D',
       column: 2,
-      target: false,
+      target: true,
       clickType: 'default',
     },
     {
@@ -249,7 +262,7 @@ function App(): React.JSX.Element {
       value: 'D5',
       row: 'D',
       column: 5,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -265,7 +278,7 @@ function App(): React.JSX.Element {
       value: 'D7',
       row: 'D',
       column: 7,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -281,7 +294,7 @@ function App(): React.JSX.Element {
       value: 'E1',
       row: 'E',
       column: 1,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -297,7 +310,7 @@ function App(): React.JSX.Element {
       value: 'E3',
       row: 'E',
       column: 3,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -305,7 +318,7 @@ function App(): React.JSX.Element {
       value: 'E4',
       row: 'E',
       column: 4,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -313,7 +326,7 @@ function App(): React.JSX.Element {
       value: 'E5',
       row: 'E',
       column: 5,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -345,7 +358,7 @@ function App(): React.JSX.Element {
       value: 'F1',
       row: 'F',
       column: 1,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -361,7 +374,7 @@ function App(): React.JSX.Element {
       value: 'F3',
       row: 'F',
       column: 3,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -409,7 +422,7 @@ function App(): React.JSX.Element {
       value: 'G1',
       row: 'G',
       column: 1,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -417,7 +430,7 @@ function App(): React.JSX.Element {
       value: 'G2',
       row: 'G',
       column: 2,
-      target: false,
+      target: true,
       clickType: 'default',
     },
     {
@@ -425,7 +438,7 @@ function App(): React.JSX.Element {
       value: 'G3',
       row: 'G',
       column: 3,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -433,7 +446,7 @@ function App(): React.JSX.Element {
       value: 'G4',
       row: 'G',
       column: 4,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -441,7 +454,7 @@ function App(): React.JSX.Element {
       value: 'G5',
       row: 'G',
       column: 5,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -473,7 +486,7 @@ function App(): React.JSX.Element {
       value: 'H1',
       row: 'H',
       column: 1,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -481,7 +494,7 @@ function App(): React.JSX.Element {
       value: 'H2',
       row: 'H',
       column: 2,
-      target: false,
+      target: true,
       clickType: 'default',
     },
     {
@@ -489,7 +502,7 @@ function App(): React.JSX.Element {
       value: 'H3',
       row: 'H',
       column: 3,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -497,7 +510,7 @@ function App(): React.JSX.Element {
       value: 'H4',
       row: 'H',
       column: 4,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
@@ -505,7 +518,7 @@ function App(): React.JSX.Element {
       value: 'H5',
       row: 'H',
       column: 5,
-      target: true,
+      target: false,
       clickType: 'default',
     },
     {
