@@ -9,8 +9,7 @@ import Cell from './Cell';
 import {removeStringItemFromArray, sortNumbers} from '../utils/helpers';
 
 const Board2: React.FC<BoardProps> = ({puzzle}) => {
-  const [currentPuzzle, setCurrentPuzzle] = useState<puzzleArray>(puzzle);
-  const [currentRows, setCurrentRows] = useState<cellObject[][]>([
+  const rows = [
     puzzle.filter(cell => cell.row === 2 && cell.target === true),
     puzzle.filter(cell => cell.row === 3 && cell.target === true),
     puzzle.filter(cell => cell.row === 4 && cell.target === true),
@@ -21,6 +20,67 @@ const Board2: React.FC<BoardProps> = ({puzzle}) => {
     puzzle.filter(cell => cell.row === 9 && cell.target === true),
     puzzle.filter(cell => cell.row === 10 && cell.target === true),
     puzzle.filter(cell => cell.row === 11 && cell.target === true),
+  ];
+
+  const formatRow = (row: cellObject[]) => {
+    const newArray: cellObject[][] = [];
+
+    for (let i = 0; i < row.length; i++) {
+      if (row[i].target === true) {
+        const array: cellObject[] = [row[i]];
+        console.log('array', row);
+        while (row[i + 1] && row[i + 1].target === true) {
+          array.push(row[i + 1]);
+          i++;
+        }
+        newArray.push(array);
+      }
+    }
+    console.log('newArray', row);
+
+    return newArray;
+  };
+
+  formatRow(rows[0]);
+  console.log('formatted', formatRow(rows[0]));
+
+  const columns = [
+    puzzle.filter(cell => cell.column === 2 && cell.target === true),
+    puzzle.filter(cell => cell.column === 3 && cell.target === true),
+    puzzle.filter(cell => cell.column === 4 && cell.target === true),
+    puzzle.filter(cell => cell.column === 5 && cell.target === true),
+    puzzle.filter(cell => cell.column === 6 && cell.target === true),
+    puzzle.filter(cell => cell.column === 7 && cell.target === true),
+    puzzle.filter(cell => cell.column === 8 && cell.target === true),
+    puzzle.filter(cell => cell.column === 9 && cell.target === true),
+    puzzle.filter(cell => cell.column === 10 && cell.target === true),
+    puzzle.filter(cell => cell.column === 11 && cell.target === true),
+  ];
+  // console.log('rows', [
+  //   formatRow(puzzle.filter(cell => cell.row === 2 && cell.target === true)),
+  //   formatRow(puzzle.filter(cell => cell.row === 3 && cell.target === true)),
+  //   formatRow(puzzle.filter(cell => cell.row === 4 && cell.target === true)),
+  //   formatRow(puzzle.filter(cell => cell.row === 5 && cell.target === true)),
+  //   formatRow(puzzle.filter(cell => cell.row === 6 && cell.target === true)),
+  //   formatRow(puzzle.filter(cell => cell.row === 7 && cell.target === true)),
+  //   formatRow(puzzle.filter(cell => cell.row === 8 && cell.target === true)),
+  //   formatRow(puzzle.filter(cell => cell.row === 9 && cell.target === true)),
+  //   formatRow(puzzle.filter(cell => cell.row === 10 && cell.target === true)),
+  //   formatRow(puzzle.filter(cell => cell.row === 11 && cell.target === true)),
+  // ]);
+
+  const [currentPuzzle, setCurrentPuzzle] = useState<puzzleArray>(puzzle);
+  const [currentRows, setCurrentRows] = useState<cellObject[][]>([
+    formatRow(puzzle.filter(cell => cell.row === 2 && cell.target === true)),
+    formatRow(puzzle.filter(cell => cell.row === 3 && cell.target === true)),
+    formatRow(puzzle.filter(cell => cell.row === 4 && cell.target === true)),
+    formatRow(puzzle.filter(cell => cell.row === 5 && cell.target === true)),
+    formatRow(puzzle.filter(cell => cell.row === 6 && cell.target === true)),
+    formatRow(puzzle.filter(cell => cell.row === 7 && cell.target === true)),
+    formatRow(puzzle.filter(cell => cell.row === 8 && cell.target === true)),
+    formatRow(puzzle.filter(cell => cell.row === 9 && cell.target === true)),
+    formatRow(puzzle.filter(cell => cell.row === 10 && cell.target === true)),
+    formatRow(puzzle.filter(cell => cell.row === 11 && cell.target === true)),
   ]);
 
   const [currentColumns, setCurrentColumns] = useState<cellObject[][]>([
@@ -46,6 +106,7 @@ const Board2: React.FC<BoardProps> = ({puzzle}) => {
       : newArray.push(id.toString());
 
     sortNumbers(newArray);
+    console.log('pressed array', newArray);
     setPressedArray(newArray);
   };
 
@@ -66,6 +127,7 @@ const Board2: React.FC<BoardProps> = ({puzzle}) => {
   };
 
   const targetIds = getTargetIds(currentPuzzle);
+  console.log('targetIds', targetIds);
 
   const [isPuzzleComplete, setIsPuzzleComplete] = useState<boolean>(false);
 
