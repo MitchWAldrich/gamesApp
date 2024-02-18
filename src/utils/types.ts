@@ -16,7 +16,7 @@ export type CellProps = {
   hitArray?: string[];
   missArray: string[];
   columns?: cellObject[][];
-  rows?: cellObject[][];
+  rows?: cellObject[][][];
 };
 
 export type puzzleArray = {
