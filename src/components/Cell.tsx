@@ -14,10 +14,16 @@ const Cell: React.FC<CellProps> = ({
   rows,
 }) => {
   const setLabel = (cellValue: string) => {
-    let label: number | null = null;
+    let label: number | number[] | null = null;
 
     if (cellObj.column === 1 && cellValue !== 'A1') {
-      label = rows?.length ? rows[cellObj.row - 2]?.length : 0;
+      if (rows) {
+        if (rows[cellObj.row - 2].length > 1) {
+          label = rows[cellObj.row - 2]?.map(array => array.length).toString();
+        } else if (rows[cellObj.row - 2].length === 1) {
+          label = rows[cellObj.row - 2][0]?.length;
+        } else label = 0;
+      }
     }
 
     if (cellObj.row === 1 && cellValue !== 'A1') {
