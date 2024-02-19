@@ -15,7 +15,7 @@ export type CellProps = {
   cellObj: cellObject;
   hitArray?: string[];
   missArray: string[];
-  columns?: cellObject[][];
+  columns?: cellObject[][][];
   rows?: cellObject[][][];
 };
 
