@@ -9,9 +9,11 @@ import {
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 import Board from './src/components/Board';
 import Board2 from './src/components/Board2';
+import Board3 from './src/components/Board3';
 
 import {B1game1} from './src/puzzles/board1/game1';
 import {B2game1} from './src/puzzles/board2/game1';
+import {B3game1} from './src/puzzles/board3/game1';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -49,7 +51,8 @@ function App(): React.JSX.Element {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           {/* <Board puzzle={B1game1} /> */}
-          <Board2 puzzle={B2game1} />
+          {/* <Board2 puzzle={B2game1} /> */}
+          <Board3 puzzle={B3game1} />
         </View>
       </View>
     </SafeAreaView>

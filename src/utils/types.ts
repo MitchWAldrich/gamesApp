@@ -36,5 +36,5 @@ export type cellObject = {
   target: boolean | null;
   clickType: string;
   isLabel?: boolean | null;
-  label?: string | null;
+  label?: string | number | null;
 }
