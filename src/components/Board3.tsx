@@ -17,6 +17,8 @@ import {removeStringItemFromArray, sortNumbers} from '../utils/helpers';
 
 const Board3: React.FC<BoardProps> = ({puzzle}) => {
   const [clickType, setClickType] = useState<string>('default');
+  const [isDraft, setIsDraft] = useState<boolean>(false);
+  const [isFinal, setIsFinal] = useState<boolean>(false);
 
   const rows = [
     puzzle.filter(cell => cell.row === 2 && cell.target === true),
@@ -172,8 +174,14 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
     setClickType(clickType === 'hit' ? 'default' : 'hit');
   };
 
-  const setClick = () => {
-    setClickType(clickType === 'miss' ? 'default' : 'miss');
+  const setClick = (writeType: string) => {
+    if (writeType === 'draft') {
+      setIsDraft(true);
+    }
+
+    if (writeType === 'final') {
+      setIsFinal(true);
+    }
   };
 
   return (
@@ -231,7 +239,7 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
           <View style={styles.draft_button}>
             <Button
               title="Draft"
-              onPress={() => setClick()}
+              onPress={() => setClick('draft')}
               color="grey"></Button>
           </View>
         </View>
@@ -270,7 +278,7 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
             <View style={styles.final_button}>
               <Button
                 title="Final"
-                onPress={() => setClick()}
+                onPress={() => setClick('final')}
                 color="green"></Button>
             </View>
           </View>
