@@ -5,7 +5,7 @@ export const B3game1 = [
     row: 1,
     column: 1,
     target: false,
-    clickType: 'draft/final',
+    clickType: 'default',
     isLabel: false,
     label: null,
 },
@@ -37,7 +37,7 @@ export const B3game1 = [
     target: false,
     clickType: 'label',
     isLabel: false,
-    label: '7',
+    label: 7,
 },
   {
     id: '5',
@@ -57,7 +57,7 @@ export const B3game1 = [
     target: false,
     clickType: 'label',
     isLabel: false,
-    label: '3',
+    label: 3,
 },
   {
     id: '7',
@@ -67,7 +67,7 @@ export const B3game1 = [
     target: false,
     clickType: 'label',
     isLabel: false,
-    label: '6',
+    label: 6,
 },
   {
     id: '8',
@@ -137,7 +137,7 @@ export const B3game1 = [
     target: true,
     clickType: 'default',
     isLabel: false,
-    label: '2',
+    label: 2,
 },
   {
     id: '15',
