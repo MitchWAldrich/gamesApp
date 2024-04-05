@@ -17,6 +17,9 @@ import {removeStringItemFromArray, sortNumbers} from '../utils/helpers';
 
 const Board3: React.FC<BoardProps> = ({puzzle}) => {
   const [clickType, setClickType] = useState<string>('default');
+  const [number, setNumber] = useState<string | number | null>(null);
+  const [currentCell, setCurrentCell] = useState<string | number | null>(null);
+  const [numberValue, setNumberValue] = useState<string | number | null>(null);
   const [isDraft, setIsDraft] = useState<boolean>(false);
   const [isFinal, setIsFinal] = useState<boolean>(false);
 
@@ -139,15 +142,12 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
 
   const [pressedArray, setPressedArray] = useState<string[]>([]);
 
-  const toggleItemSelect = (id: number) => {
-    const newArray = [...pressedArray];
-
-    newArray.includes(id.toString())
-      ? removeStringItemFromArray(newArray, id.toString())
-      : newArray.push(id.toString());
-
-    sortNumbers(newArray);
-    setPressedArray(newArray);
+  const toggleItemSelect = (
+    id: number | string,
+    numberVal: string | number | null,
+  ) => {
+    setCurrentCell(id);
+    console.log('id and number', id, numberVal);
   };
 
   useEffect(() => {
@@ -170,20 +170,7 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
 
   const [isPuzzleComplete, setIsPuzzleComplete] = useState<boolean>(false);
 
-  const setNumber = () => {
-    setClickType(clickType === 'hit' ? 'default' : 'hit');
-  };
-
-  const setClick = (writeType: string) => {
-    if (writeType === 'draft') {
-      setIsDraft(true);
-    }
-
-    if (writeType === 'final') {
-      setIsFinal(true);
-    }
-  };
-
+  console.log('type and number', clickType, number);
   return (
     <>
       <View style={styles.flexrow_container}>
@@ -191,10 +178,12 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
           <FlatList
             data={currentPuzzle}
             renderItem={({item, index}) => (
-              <Pressable onPress={() => toggleItemSelect(index + 1)}>
+              <Pressable onPress={() => toggleItemSelect(item.id, number)}>
                 <Cell3
                   cellObj={item}
-                  missArray={pressedArray}
+                  hitArray={pressedArray}
+                  finalNumber={number}
+                  currentCell={currentCell}
                   // rows={currentRows}
                   // columns={currentColumns}
                 />
@@ -209,37 +198,37 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
           <View style={styles.number_buttons}>
             <Button
               title="1"
-              onPress={() => setNumber()}
+              onPress={() => setNumber(1)}
               color="black"></Button>
           </View>
           <View style={styles.number_buttons}>
             <Button
               title="2"
-              onPress={() => setNumber()}
+              onPress={() => setNumber(2)}
               color="black"></Button>
           </View>
           <View style={styles.number_buttons}>
             <Button
               title="3"
-              onPress={() => setNumber()}
+              onPress={() => setNumber(3)}
               color="black"></Button>
           </View>
           <View style={styles.number_buttons}>
             <Button
               title="4"
-              onPress={() => setNumber()}
+              onPress={() => setNumber(4)}
               color="black"></Button>
           </View>
           <View style={styles.number_buttons}>
             <Button
               title="5"
-              onPress={() => setNumber()}
+              onPress={() => setNumber(5)}
               color="black"></Button>
           </View>
           <View style={styles.draft_button}>
             <Button
               title="Draft"
-              onPress={() => setClick('draft')}
+              onPress={() => setClickType('draft')}
               color="grey"></Button>
           </View>
         </View>
@@ -248,37 +237,37 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
             <View style={styles.number_buttons2}>
               <Button
                 title="6"
-                onPress={() => setNumber()}
+                onPress={() => setNumber(6)}
                 color="black"></Button>
             </View>
             <View style={styles.number_buttons2}>
               <Button
                 title="7"
-                onPress={() => setNumber()}
+                onPress={() => setNumber(7)}
                 color="black"></Button>
             </View>
             <View style={styles.number_buttons2}>
               <Button
                 title="8"
-                onPress={() => setNumber()}
+                onPress={() => setNumber(8)}
                 color="black"></Button>
             </View>
             <View style={styles.number_buttons2}>
               <Button
                 title="9"
-                onPress={() => setNumber()}
+                onPress={() => setNumber(9)}
                 color="black"></Button>
             </View>
             <View style={styles.number_buttons2}>
               <Button
-                title="10"
-                onPress={() => setNumber()}
+                title="0"
+                onPress={() => setNumber(0)}
                 color="black"></Button>
             </View>
             <View style={styles.final_button}>
               <Button
                 title="Final"
-                onPress={() => setClick('final')}
+                onPress={() => setClickType('final')}
                 color="green"></Button>
             </View>
           </View>
