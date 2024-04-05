@@ -13,8 +13,10 @@ export type ButtonProps = {
 
 export type CellProps = {
   cellObj: cellObject;
-  hitArray?: string[];
-  missArray: string[];
+  currentCell?: number | string | null;
+  finalNumber?: number | string | null;
+  hitArray?: string[] | undefined;
+  missArray?: string[] | undefined;
   columns?: cellObject[][][];
   rows?: cellObject[][][];
 };
