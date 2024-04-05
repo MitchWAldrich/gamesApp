@@ -1,57 +1,39 @@
-import {StyleSheet, Text} from 'react-native';
+import {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 
 import {CellProps} from '../utils/types';
 
 const Cell3: React.FC<CellProps> = ({
   cellObj,
+  currentCell,
+  finalNumber,
   hitArray,
-  missArray,
-  columns,
-  rows,
 }) => {
-  // const setLabel = (cellValue: string) => {
-  //   let label: number | number[] | null | string = null;
+  const [cellValue, setCellValue] = useState<
+    string | number | null | undefined
+  >(null);
 
-  //   if (cellObj.column === 1 && cellValue !== 'A1') {
-  //     if (rows) {
-  //       if (rows[cellObj.row - 2]?.length > 1) {
-  //         label = rows[cellObj.row - 2]?.map(array => array?.length).toString();
-  //       } else if (rows[cellObj.row - 2]?.length === 1) {
-  //         label = rows[cellObj.row - 2][0]?.length;
-  //       } else label = 0;
-  //     }
-  //   }
-
-  //   if (cellObj.row === 1 && cellValue !== 'A1') {
-  //     if (columns) {
-  //       if (columns[(cellObj.column ?? 0) - 2]?.length > 1) {
-  //         label = columns[(cellObj.column ?? 0) - 2]
-  //           ?.map(array => array.length)
-  //           .toString();
-  //       } else if (columns[(cellObj.column ?? 0) - 2]?.length === 1) {
-  //         label = columns[(cellObj.column ?? 0) - 2][0]?.length;
-  //       } else label = 0;
-  //     }
-  //   }
-
-  //   return label;
-  // };
-
-  const animatedStyles = useAnimatedStyle(() => {
+  const animatedText = useAnimatedStyle(() => {
     return {
-      backgroundColor: missArray.includes(cellObj.id)
-        ? 'red'
+      color: hitArray?.includes(cellObj.id)
+        ? 'green'
         : cellObj.isLabel === true
         ? ''
-        : 'white',
+        : 'black',
     };
   });
 
   return (
-    <Animated.View style={[styles.cell, animatedStyles]}>
-      <Text>{cellObj.label}</Text>
-    </Animated.View>
+    <View style={styles.cell}>
+      <Animated.Text style={[styles.text, animatedText]}>
+        {cellObj.label !== null
+          ? cellObj.label
+          : currentCell === cellObj.id
+          ? finalNumber
+          : null}
+      </Animated.Text>
+    </View>
   );
 };
 
@@ -71,6 +53,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   miss: {
     backgroundColor: 'green',
@@ -80,6 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  text: {},
 });
 
 export default Cell3;
