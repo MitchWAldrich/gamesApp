@@ -79,7 +79,7 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
     numberVal: string | number | null,
   ) => {
     setCurrentCell(id);
-    setCurrentPuzzle(updatePuzzle(currentPuzzle, id, numberVal));
+    setCurrentPuzzle(updatePuzzle(currentPuzzle, id, numberVal, clickType));
     console.log('id and number', id, numberVal);
   };
 
