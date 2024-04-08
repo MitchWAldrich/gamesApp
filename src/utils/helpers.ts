@@ -58,6 +58,7 @@ export const updatePuzzle = (
   puzzleObjs: cellObject[],
   cellId: string | number,
   cellValue: string | number | null,
+  clickType: string,
 ) => {
   const cellIndex = puzzleObjs.findIndex(
     (puzzleObj: cellObject) => puzzleObj.id === cellId,
@@ -72,7 +73,7 @@ export const updatePuzzle = (
     column: originalCell?.column ?? puzzleObjs[Number(cellId) - 1].column,
     target: originalCell?.target ?? puzzleObjs[Number(cellId) - 1].target,
     clickType:
-      originalCell?.clickType ?? puzzleObjs[Number(cellId) - 1].clickType,
+      clickType ?? puzzleObjs[Number(cellId) - 1].clickType,
     isLabel: originalCell?.isLabel ?? puzzleObjs[Number(cellId) - 1].isLabel,
     label: cellValue ?? puzzleObjs[Number(cellId) - 1].label,
   };
