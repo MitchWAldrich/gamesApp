@@ -27,7 +27,7 @@ export const B3game1 = [
     target: false,
     clickType: 'label',
     isLabel: false,
-    label: 4,
+    label: [4],
 },
   {
     id: '4',
@@ -37,7 +37,7 @@ export const B3game1 = [
     target: false,
     clickType: 'label',
     isLabel: false,
-    label: 7,
+    label: [7],
 },
   {
     id: '5',
@@ -57,7 +57,7 @@ export const B3game1 = [
     target: false,
     clickType: 'label',
     isLabel: false,
-    label: 3,
+    label: [3],
 },
   {
     id: '7',
@@ -67,7 +67,7 @@ export const B3game1 = [
     target: false,
     clickType: 'label',
     isLabel: false,
-    label: 6,
+    label: [6],
 },
   {
     id: '8',
@@ -137,7 +137,7 @@ export const B3game1 = [
     target: true,
     clickType: 'default',
     isLabel: false,
-    label: 2,
+    label: [2],
 },
   {
     id: '15',
@@ -187,7 +187,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 1,
+    label: [1],
 },
   {
     id: '20',
@@ -207,7 +207,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 3,
+    label: [3],
 },
   {
     id: '22',
@@ -217,7 +217,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 6,
+    label: [6],
 },
   {
     id: '23',
@@ -237,7 +237,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 5,
+    label: [5],
 },
   {
     id: '25',
@@ -247,7 +247,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 2,
+    label: [2],
 },
   {
     id: '26',
@@ -267,7 +267,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 7,
+    label: [7],
 },
   {
     id: '28',
@@ -277,7 +277,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 2,
+    label: [2],
 },
   {
     id: '29',
@@ -297,7 +297,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 5,
+    label: [5],
 },
   {
     id: '31',
@@ -337,7 +337,7 @@ export const B3game1 = [
     target: false,
     clickType: 'label',
     isLabel: false,
-    label: 9,
+    label: [9],
 },
   {
     id: '35',
@@ -357,7 +357,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 4,
+    label: [4],
 },
   {
     id: '37',
@@ -377,7 +377,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 9,
+    label: [9],
 },
   {
     id: '39',
@@ -457,7 +457,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 8,
+    label: [8],
 },
   {
     id: '47',
@@ -517,7 +517,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 3,
+    label: [3],
 },
   {
     id: '53',
@@ -537,7 +537,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 1,
+    label: [1],
 },
   {
     id: '55',
@@ -547,7 +547,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 3,
+    label: [3],
 },
   {
     id: '56',
@@ -567,7 +567,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 9,
+    label: [9],
 },
   {
     id: '58',
@@ -577,7 +577,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 4,
+    label: [4],
 },
   {
     id: '59',
@@ -597,7 +597,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 2,
+    label: [2],
 },
   {
     id: '61',
@@ -607,7 +607,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 5,
+    label: [5],
 },
   {
     id: '62',
@@ -627,7 +627,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 8,
+    label: [8],
 },
   {
     id: '64',
@@ -677,7 +677,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 7,
+    label: [7],
 },
   {
     id: '69',
@@ -747,7 +747,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 8,
+    label: [8],
 },
   {
     id: '76',
@@ -757,7 +757,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 3,
+    label: [3],
 },
   {
     id: '77',
@@ -777,7 +777,7 @@ export const B3game1 = [
     target: false,
     clickType: 'label',
     isLabel: false,
-    label: 1,
+    label: [1],
 },
   {
     id: '79',
@@ -787,7 +787,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 7,
+    label: [7],
 },
   {
     id: '80',
@@ -795,9 +795,9 @@ export const B3game1 = [
     row: 9,
     column: 8,
     target: false,
-    clickType: 'default',
+    clickType: 'draft',
     isLabel: false,
-    label: null,
+    label: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 },
   {
     id: '81',
