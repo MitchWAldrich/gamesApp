@@ -27,11 +27,7 @@ const Cell3: React.FC<CellProps> = ({
   return (
     <View style={styles.cell}>
       <Animated.Text style={[styles.text, animatedText]}>
-        {cellObj.label !== null
-          ? cellObj.label
-          : currentCell === cellObj.id
-          ? finalNumber
-          : null}
+        {cellObj.label}
       </Animated.Text>
     </View>
   );
