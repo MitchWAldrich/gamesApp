@@ -30,15 +30,35 @@ const Cell3: React.FC<CellProps> = ({cellObj}) => {
     if (!labelValue) return;
 
     //update so each number has a static position
-    let row1 = [labelValue[0], labelValue[1], labelValue[2]];
-    let row2 =
-      labelValue.length > 3
-        ? [labelValue[3], labelValue[4], labelValue[5]]
-        : null;
-    let row3 =
-      labelValue.length > 5
-        ? [labelValue[6], labelValue[7], labelValue[8]]
-        : null;
+    // let row1 = [labelValue[0], labelValue[1], labelValue[2]];
+    // let row2? =
+    //   labelValue.length > 3
+    //     ? [labelValue[3], labelValue[4], labelValue[5]]
+    //     : null;
+    // let row3 =
+    //   labelValue.length > 5
+    //     ? [labelValue[6], labelValue[7], labelValue[8]]
+    //     : null;
+
+    let row1 = [0, 0, 0];
+    let row2 = [0, 0, 0];
+    let row3 = [0, 0, 0];
+    // let row2 = labelValue.length > 3 ? [0, 0, 0] : null;
+    // let row3 = labelValue.length > 5 ? [0, 0, 0] : null;
+
+    if (cellObj.clickType === 'draft') {
+      for (let i = 0; i < labelValue.length; i++) {
+        if (labelValue[i] === 1) row1.splice(0, 1, 1);
+        if (labelValue[i] === 2) row1.splice(1, 1, 2);
+        if (labelValue[i] === 3) row1.splice(2, 1, 3);
+        if (labelValue[i] === 4) row2?.splice(0, 1, 4);
+        if (labelValue[i] === 5) row2?.splice(1, 1, 5);
+        if (labelValue[i] === 6) row2?.splice(2, 1, 6);
+        if (labelValue[i] === 7) row3?.splice(0, 1, 7);
+        if (labelValue[i] === 8) row3?.splice(1, 1, 8);
+        if (labelValue[i] === 9) row3?.splice(2, 1, 9);
+      }
+    }
 
     const displayValue = (
       <>
