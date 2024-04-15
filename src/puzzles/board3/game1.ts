@@ -437,7 +437,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 2,
+    label: [2],
 },
   {
     id: '45',
@@ -477,7 +477,7 @@ export const B3game1 = [
     target: false,
     clickType: 'default',
     isLabel: false,
-    label: 7,
+    label: [7],
 },
   {
     id: '49',
