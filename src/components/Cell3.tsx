@@ -29,22 +29,9 @@ const Cell3: React.FC<CellProps> = ({cellObj}) => {
   ) => {
     if (!labelValue) return;
 
-    //update so each number has a static position
-    // let row1 = [labelValue[0], labelValue[1], labelValue[2]];
-    // let row2? =
-    //   labelValue.length > 3
-    //     ? [labelValue[3], labelValue[4], labelValue[5]]
-    //     : null;
-    // let row3 =
-    //   labelValue.length > 5
-    //     ? [labelValue[6], labelValue[7], labelValue[8]]
-    //     : null;
-
     let row1 = [0, 0, 0];
     let row2 = [0, 0, 0];
     let row3 = [0, 0, 0];
-    // let row2 = labelValue.length > 3 ? [0, 0, 0] : null;
-    // let row3 = labelValue.length > 5 ? [0, 0, 0] : null;
 
     if (cellObj.clickType === 'draft') {
       for (let i = 0; i < labelValue.length; i++) {
@@ -61,21 +48,35 @@ const Cell3: React.FC<CellProps> = ({cellObj}) => {
     }
 
     const displayValue = (
-      <>
-        <Animated.Text style={[styles.text, animatedText]}>
-          {row1}
-        </Animated.Text>
-        {labelValue.length > 1 && (
-          <Animated.Text style={[styles.text, animatedText]}>
-            {row2}
-          </Animated.Text>
-        )}
-        {labelValue.length > 3 && (
-          <Animated.Text style={[styles.text, animatedText]}>
-            {row3}
-          </Animated.Text>
-        )}
-      </>
+      <Animated.View style={styles.inner_cell_container}>
+        <Animated.View style={styles.inner_cell_row}>
+          {row1.map((cell, index) => (
+            <Animated.View key={index} style={styles.inner_cell}>
+              <Animated.Text style={[styles.text, animatedText]}>
+                {cell === 0 ? '' : cell}
+              </Animated.Text>
+            </Animated.View>
+          ))}
+        </Animated.View>
+        <Animated.View style={styles.inner_cell_row}>
+          {row2.map((cell, index) => (
+            <Animated.View key={index} style={styles.inner_cell}>
+              <Animated.Text style={[styles.text, animatedText]}>
+                {cell === 0 ? '' : cell}
+              </Animated.Text>
+            </Animated.View>
+          ))}
+        </Animated.View>
+        <Animated.View style={styles.inner_cell_row}>
+          {row3.map((cell, index) => (
+            <Animated.View key={index} style={styles.inner_cell}>
+              <Animated.Text style={[styles.text, animatedText]}>
+                {cell === 0 ? '' : cell}
+              </Animated.Text>
+            </Animated.View>
+          ))}
+        </Animated.View>
+      </Animated.View>
     );
 
     return displayValue;
@@ -83,7 +84,15 @@ const Cell3: React.FC<CellProps> = ({cellObj}) => {
 
   return (
     <Animated.View style={[styles.cell, animatedCell]}>
-      {formatDraftDisplay(cellObj.label)}
+      {cellObj.clickType === 'draft' ? (
+        formatDraftDisplay(cellObj.label)
+      ) : cellObj.label ? (
+        <Animated.Text style={[styles.text, animatedText]}>
+          {cellObj.label[0]}
+        </Animated.Text>
+      ) : (
+        <Animated.Text style={[styles.text, animatedText]}> </Animated.Text>
+      )}
     </Animated.View>
   );
 };
@@ -107,6 +116,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+  },
+  inner_cell: {
+    display: 'flex',
+    flexDirection: 'row',
+    height: 10,
+    width: 10,
+    justifyContent: 'center',
+  },
+  inner_cell_container: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  inner_cell_row: {
+    display: 'flex',
+    flexDirection: 'row',
   },
   miss: {
     backgroundColor: 'green',
