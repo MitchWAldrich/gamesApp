@@ -25,7 +25,7 @@ const Cell3: React.FC<CellProps> = ({cellObj}) => {
   });
 
   const formatDraftDisplay = (
-    labelValue: string[] | number[] | null | undefined,
+    labelValue: (string | number)[] | null | undefined,
   ) => {
     if (!labelValue) return;
 
