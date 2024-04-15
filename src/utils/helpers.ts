@@ -65,8 +65,34 @@ export const updatePuzzle = (
   );
 
   const originalCell = puzzleObjs.find(puzzleObj => puzzleObj.id === cellId);
+  if (originalCell?.isLabel === true) return puzzleObjs;
 
-  const updatedCell = {
+  let updatedCellValue: (string | number)[] | null | undefined = originalCell?.label ? [...originalCell?.label] : [];
+
+  if (clickType === 'draft') {
+    if (updatedCellValue && cellValue) {
+      const cellValueIndex = updatedCellValue.indexOf(cellValue);
+
+      updatedCellValue.includes(cellValue) ? updatedCellValue.splice(cellValueIndex, 1) : updatedCellValue.push(cellValue);
+    }
+  }
+
+  if (clickType === 'final') {
+    if (updatedCellValue && cellValue) {
+      if (updatedCellValue.length === 1 && updatedCellValue.includes(cellValue)) {
+        updatedCellValue.pop();
+      } else if (updatedCellValue.length === 1 && !updatedCellValue.includes(cellValue)) {
+        updatedCellValue.pop();
+        updatedCellValue.push(cellValue);
+      } else if (updatedCellValue.length > 1) {
+        updatedCellValue.splice(0, updatedCellValue.length, cellValue)
+      } else {
+        updatedCellValue.push(cellValue);
+      }
+    }
+  }
+
+  const updatedCell: cellObject = {
     id: originalCell?.id ?? puzzleObjs[Number(cellId) - 1].id,
     value: originalCell?.value ?? puzzleObjs[Number(cellId) - 1].value,
     row: originalCell?.row ?? puzzleObjs[Number(cellId) - 1].row,
@@ -75,7 +101,7 @@ export const updatePuzzle = (
     clickType:
       clickType ?? puzzleObjs[Number(cellId) - 1].clickType,
     isLabel: originalCell?.isLabel ?? puzzleObjs[Number(cellId) - 1].isLabel,
-    label: cellValue ?? puzzleObjs[Number(cellId) - 1].label,
+    label: updatedCellValue ?? puzzleObjs[Number(cellId) - 1].label,
   };
 
   const updatedPuzzle = puzzleObjs
