@@ -797,7 +797,7 @@ export const B3game1 = [
     target: false,
     clickType: 'draft',
     isLabel: false,
-    label: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    label: [1, 2, 3, 5, 6, 7, 9],
 },
   {
     id: '81',
