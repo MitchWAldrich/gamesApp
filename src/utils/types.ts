@@ -11,6 +11,16 @@ export type ButtonProps = {
   loading?: boolean;
 };
 
+export type Button3Props = {
+  onPress?: (id: string, type: string | number | null | undefined) => void;
+  onLongPress?: () => void;
+  title?: string | number | null;
+  disabled?: boolean;
+  loading?: boolean;
+  row?: number;
+  special?: string;
+};
+
 export type CellProps = {
   cellObj: cellObject;
   currentCell?: number | string | null;
@@ -28,6 +38,8 @@ export type puzzleArray = {
     column: number | null;
     target: boolean | null;
     clickType: string;
+    isLabel?: boolean;
+    label?: string[] | number[];
   }[];
 
 export type cellObject = {
