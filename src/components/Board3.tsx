@@ -1,85 +1,38 @@
 import {useEffect, useState} from 'react';
-
-import {
-  Button,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {FlatList, Pressable, Text, View} from 'react-native';
 
 import {BoardProps, cellObject, puzzleArray} from '../utils/types';
 
+import Button3 from './Button3';
 import Cell3 from './Cell3';
 
 import {
-  formatColumn,
-  formatRow,
+  getColumnValues,
+  getRowValues,
   sortNumbers,
   updatePuzzle,
 } from '../utils/helpers';
+import {styles} from '../styles/board3styles';
 
 const Board3: React.FC<BoardProps> = ({puzzle}) => {
   const [clickType, setClickType] = useState<string>('default');
   const [number, setNumber] = useState<string | number | null>(null);
   const [currentCell, setCurrentCell] = useState<string | number | null>(null);
   const [currentPuzzle, setCurrentPuzzle] = useState<puzzleArray>(puzzle);
-
-  const [currentRows, setCurrentRows] = useState<cellObject[][][]>([
-    formatRow(puzzle.filter(cell => cell.row === 2 && cell.target === true)),
-    formatRow(puzzle.filter(cell => cell.row === 3 && cell.target === true)),
-    formatRow(puzzle.filter(cell => cell.row === 4 && cell.target === true)),
-    formatRow(puzzle.filter(cell => cell.row === 5 && cell.target === true)),
-    formatRow(puzzle.filter(cell => cell.row === 6 && cell.target === true)),
-    formatRow(puzzle.filter(cell => cell.row === 7 && cell.target === true)),
-    formatRow(puzzle.filter(cell => cell.row === 8 && cell.target === true)),
-    formatRow(puzzle.filter(cell => cell.row === 9 && cell.target === true)),
-    formatRow(puzzle.filter(cell => cell.row === 10 && cell.target === true)),
-    formatRow(puzzle.filter(cell => cell.row === 11 && cell.target === true)),
-  ]);
-
-  const [currentColumns, setCurrentColumns] = useState<cellObject[][][]>([
-    formatColumn(
-      puzzle.filter(cell => cell.column === 2 && cell.target === true),
-    ),
-    formatColumn(
-      puzzle.filter(cell => cell.column === 3 && cell.target === true),
-    ),
-    formatColumn(
-      puzzle.filter(cell => cell.column === 4 && cell.target === true),
-    ),
-    formatColumn(
-      puzzle.filter(cell => cell.column === 5 && cell.target === true),
-    ),
-    formatColumn(
-      puzzle.filter(cell => cell.column === 6 && cell.target === true),
-    ),
-    formatColumn(
-      puzzle.filter(cell => cell.column === 7 && cell.target === true),
-    ),
-    formatColumn(
-      puzzle.filter(cell => cell.column === 8 && cell.target === true),
-    ),
-    formatColumn(
-      puzzle.filter(cell => cell.column === 9 && cell.target === true),
-    ),
-    formatColumn(
-      puzzle.filter(cell => cell.column === 10 && cell.target === true),
-    ),
-    formatColumn(
-      puzzle.filter(cell => cell.column === 11 && cell.target === true),
-    ),
-  ]);
-
   const [pressedArray, setPressedArray] = useState<string[]>([]);
 
   const toggleItemSelect = (
     id: number | string,
     numberVal: string | number | null,
   ) => {
-    setCurrentCell(id);
-    setCurrentPuzzle(updatePuzzle(currentPuzzle, id, numberVal, clickType));
+    if (numberVal === 'draft') setClickType('draft');
+    if (numberVal === 'final') {
+      setClickType('final');
+    }
+    if (numberVal !== 'draft' && numberVal !== 'final' && id !== 'button') {
+      setCurrentCell(id);
+      setCurrentPuzzle(updatePuzzle(currentPuzzle, id, numberVal, clickType));
+    }
     console.log('id and number', id, numberVal);
   };
 
@@ -87,6 +40,9 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
     if (JSON.stringify(targetIds) === JSON.stringify(pressedArray))
       setIsPuzzleComplete(true);
   }, [pressedArray]);
+
+  const rowValues = getRowValues(currentPuzzle);
+  const columnValues = getColumnValues(currentPuzzle);
 
   const getTargetIds = (puzzle: puzzleArray) => {
     const targetsArray: string[] = [];
@@ -126,84 +82,69 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
           />
         </View>
       </View>
-      <View>
-        <View style={styles.button_container}>
-          <View style={styles.number_buttons}>
-            <Button
-              title="1"
-              onPress={() => setNumber(1)}
-              color="black"></Button>
-          </View>
-          <View style={styles.number_buttons}>
-            <Button
-              title="2"
-              onPress={() => setNumber(2)}
-              color="black"></Button>
-          </View>
-          <View style={styles.number_buttons}>
-            <Button
-              title="3"
-              onPress={() => setNumber(3)}
-              color="black"></Button>
-          </View>
-          <View style={styles.number_buttons}>
-            <Button
-              title="4"
-              onPress={() => setNumber(4)}
-              color="black"></Button>
-          </View>
-          <View style={styles.number_buttons}>
-            <Button
-              title="5"
-              onPress={() => setNumber(5)}
-              color="black"></Button>
-          </View>
-          <View style={styles.draft_button}>
-            <Button
-              title="Draft"
-              onPress={() => setClickType('draft')}
-              color="grey"></Button>
-          </View>
+      <View style={styles.button_container}>
+        <View style={styles.button_row}>
+          <Pressable onPress={() => toggleItemSelect('button', 1)}>
+            <Button3 title={1} row={1}></Button3>
+          </Pressable>
+          <Pressable onPress={() => toggleItemSelect('button', 2)}>
+            <Button3 title={2} row={1}></Button3>
+          </Pressable>
+          <Pressable onPress={() => toggleItemSelect('button', 3)}>
+            <Button3 title={3} row={1}></Button3>
+          </Pressable>
+          <Pressable onPress={() => toggleItemSelect('button', 4)}>
+            <Button3 title={4} row={1}></Button3>
+          </Pressable>
+          <Pressable onPress={() => toggleItemSelect('button', 5)}>
+            <Button3 title={5} row={1}></Button3>
+          </Pressable>
+          <Pressable onPress={() => toggleItemSelect('button', 'draft')}>
+            <Button3
+              onPress={() => toggleItemSelect}
+              title={'Draft'}
+              row={1}
+              special="draft"></Button3>
+          </Pressable>
         </View>
-        <View>
-          <View style={styles.button_container}>
-            <View style={styles.number_buttons2}>
-              <Button
-                title="6"
-                onPress={() => setNumber(6)}
-                color="black"></Button>
-            </View>
-            <View style={styles.number_buttons2}>
-              <Button
-                title="7"
-                onPress={() => setNumber(7)}
-                color="black"></Button>
-            </View>
-            <View style={styles.number_buttons2}>
-              <Button
-                title="8"
-                onPress={() => setNumber(8)}
-                color="black"></Button>
-            </View>
-            <View style={styles.number_buttons2}>
-              <Button
-                title="9"
-                onPress={() => setNumber(9)}
-                color="black"></Button>
-            </View>
-            <View style={styles.number_buttons2}>
-              <Button
-                title="0"
-                onPress={() => setNumber(0)}
-                color="black"></Button>
-            </View>
-            <View style={styles.final_button}>
-              <Button
-                title="Final"
-                onPress={() => setClickType('final')}
-                color="green"></Button>
-            </View>
-          </View>
+        <View style={styles.button_row}>
+          <Pressable onPress={() => toggleItemSelect('button', 6)}>
+            <Button3
+              onPress={() => toggleItemSelect}
+              title={6}
+              row={2}></Button3>
+          </Pressable>
+          <Pressable onPress={() => toggleItemSelect('button', 7)}>
+            <Button3
+              onPress={() => toggleItemSelect}
+              title={7}
+              row={2}></Button3>
+          </Pressable>
+          <Pressable onPress={() => toggleItemSelect('button', 8)}>
+            <Button3
+              onPress={() => toggleItemSelect}
+              title={8}
+              row={2}></Button3>
+          </Pressable>
+          <Pressable onPress={() => toggleItemSelect('button', 9)}>
+            <Button3
+              onPress={() => toggleItemSelect}
+              title={9}
+              row={2}></Button3>
+          </Pressable>
+          <Pressable onPress={() => toggleItemSelect('button', 0)}>
+            <Button3
+              onPress={() => toggleItemSelect}
+              title={0}
+              row={2}></Button3>
+          </Pressable>
+          <Pressable onPress={() => toggleItemSelect('button', 'final')}>
+            <Button3
+              onPress={() => toggleItemSelect}
+              title={'Final'}
+              row={2}
+              special="final"></Button3>
+          </Pressable>
         </View>
       </View>
       {isPuzzleComplete && (
@@ -215,74 +156,49 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  top_container: {
-    backgroundColor: 'red',
-  },
-  flexrow_container: {
-    flexDirection: 'row',
-    backgroundColor: 'blue',
-    justifyContent: 'center',
-  },
-  game_board: {},
-  cell: {
-    backgroundColor: '#ebedf0',
-    height: 20,
-    width: 20,
-    margin: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  win_container: {
-    alignItems: 'center',
-    marginTop: 25,
-  },
-  win_text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  button_container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  number_buttons: {
-    height: 50,
-    width: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    borderWidth: 2,
-    borderRadius: 5,
-  },
-  number_buttons2: {
-    height: 50,
-    width: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 2,
-    borderRadius: 5,
-    marginTop: 10,
-  },
-  draft_button: {
-    height: 50,
-    width: 70,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    borderWidth: 2,
-    borderRadius: 5,
-    marginLeft: 5,
-  },
-  final_button: {
-    height: 50,
-    width: 70,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 2,
-    borderRadius: 5,
-    marginLeft: 5,
-    marginTop: 10,
-  },
-});
-
 export default Board3;
+
+// const [currentRows, setCurrentRows] = useState<cellObject[][][]>([
+//   formatRow(puzzle.filter(cell => cell.row === 2 && cell.target === true)),
+//   formatRow(puzzle.filter(cell => cell.row === 3 && cell.target === true)),
+//   formatRow(puzzle.filter(cell => cell.row === 4 && cell.target === true)),
+//   formatRow(puzzle.filter(cell => cell.row === 5 && cell.target === true)),
+//   formatRow(puzzle.filter(cell => cell.row === 6 && cell.target === true)),
+//   formatRow(puzzle.filter(cell => cell.row === 7 && cell.target === true)),
+//   formatRow(puzzle.filter(cell => cell.row === 8 && cell.target === true)),
+//   formatRow(puzzle.filter(cell => cell.row === 9 && cell.target === true)),
+//   formatRow(puzzle.filter(cell => cell.row === 10 && cell.target === true)),
+//   formatRow(puzzle.filter(cell => cell.row === 11 && cell.target === true)),
+// ]);
+// const [currentColumns, setCurrentColumns] = useState<cellObject[][][]>([
+//   formatColumn(
+//     puzzle.filter(cell => cell.column === 2 && cell.target === true),
+//   ),
+//   formatColumn(
+//     puzzle.filter(cell => cell.column === 3 && cell.target === true),
+//   ),
+//   formatColumn(
+//     puzzle.filter(cell => cell.column === 4 && cell.target === true),
+//   ),
+//   formatColumn(
+//     puzzle.filter(cell => cell.column === 5 && cell.target === true),
+//   ),
+//   formatColumn(
+//     puzzle.filter(cell => cell.column === 6 && cell.target === true),
+//   ),
+//   formatColumn(
+//     puzzle.filter(cell => cell.column === 7 && cell.target === true),
+//   ),
+//   formatColumn(
+//     puzzle.filter(cell => cell.column === 8 && cell.target === true),
+//   ),
+//   formatColumn(
+//     puzzle.filter(cell => cell.column === 9 && cell.target === true),
+//   ),
+//   formatColumn(
+//     puzzle.filter(cell => cell.column === 10 && cell.target === true),
+//   ),
+//   formatColumn(
+//     puzzle.filter(cell => cell.column === 11 && cell.target === true),
+//   ),
+// ]);
