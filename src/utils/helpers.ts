@@ -1,4 +1,4 @@
-import { cellObject } from "./types";
+import { cellObject, puzzleArray } from "./types";
 
 export const removeStringItemFromArray = (array: string[], id: string) => {
   const index = array.indexOf(id);
@@ -110,4 +110,92 @@ export const updatePuzzle = (
     .concat(puzzleObjs.slice(cellIndex + 1));
 
   return updatedPuzzle;
+};
+
+export const getRowValues = (puzzle: puzzleArray) => {
+  const rowsObj: {
+    1: (string | undefined)[];
+    2: (string | undefined)[];
+    3: (string | undefined)[];
+    4: (string | undefined)[];
+    5: (string | undefined)[];
+    6: (string | undefined)[];
+    7: (string | undefined)[];
+    8: (string | undefined)[];
+    9: (string | undefined)[];
+  } = {
+    1: puzzle
+      .filter(cell => cell.row === 1 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    2: puzzle
+      .filter(cell => cell.row === 2 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    3: puzzle
+      .filter(cell => cell.row === 3 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    4: puzzle
+      .filter(cell => cell.row === 4 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    5: puzzle
+      .filter(cell => cell.row === 5 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    6: puzzle
+      .filter(cell => cell.row === 6 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    7: puzzle
+      .filter(cell => cell.row === 7 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    8: puzzle
+      .filter(cell => cell.row === 8 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    9: puzzle
+      .filter(cell => cell.row === 9 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+  };
+
+  return rowsObj;
+};
+
+export const getColumnValues = (puzzle: puzzleArray) => {
+  const columnsObj: {
+    1: (string | undefined)[];
+    2: (string | undefined)[];
+    3: (string | undefined)[];
+    4: (string | undefined)[];
+    5: (string | undefined)[];
+    6: (string | undefined)[];
+    7: (string | undefined)[];
+    8: (string | undefined)[];
+    9: (string | undefined)[];
+  } = {
+    1: puzzle
+      .filter(cell => cell.column === 1 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    2: puzzle
+      .filter(cell => cell.column === 2 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    3: puzzle
+      .filter(cell => cell.column === 3 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    4: puzzle
+      .filter(cell => cell.column === 4 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    5: puzzle
+      .filter(cell => cell.column === 5 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    6: puzzle
+      .filter(cell => cell.column === 6 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    7: puzzle
+      .filter(cell => cell.column === 7 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    8: puzzle
+      .filter(cell => cell.column === 8 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+    9: puzzle
+      .filter(cell => cell.column === 9 && cell.label?.toString() !== '')
+      .map(cell => cell.label?.toString()),
+  };
+
+  return columnsObj;
 };
