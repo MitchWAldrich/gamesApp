@@ -1,4 +1,6 @@
-export const B3game1 = [
+import { puzzleArray } from "../../utils/types";
+
+export const B3game1: puzzleArray = [
   {
     id: '1',
     value: 'A1',
