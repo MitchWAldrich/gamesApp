@@ -1,5 +1,5 @@
 export type BoardProps = {
-  puzzle: cellObject[];
+  puzzle: puzzleArray;
 };
 
 export type ButtonProps = {
@@ -38,8 +38,8 @@ export type puzzleArray = {
     column: number | null;
     target: boolean | null;
     clickType: string;
-    isLabel?: boolean;
-    label?: string[] | number[];
+    isLabel?: boolean | null;
+    label?: (string | number)[] | null | undefined;
   }[];
 
 export type cellObject = {
