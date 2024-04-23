@@ -55,7 +55,7 @@ export const formatRow = (row: cellObject[]) => {
 };
 
 export const updatePuzzle = (
-  puzzleObjs: cellObject[],
+  puzzleObjs: puzzleArray,
   cellId: string | number,
   cellValue: string | number | null,
   clickType: string,
@@ -104,10 +104,10 @@ export const updatePuzzle = (
     label: updatedCellValue ?? puzzleObjs[Number(cellId) - 1].label,
   };
 
-  const updatedPuzzle = puzzleObjs
+  let updatedPuzzle: puzzleArray = puzzleObjs
     .slice(0, cellIndex)
-    .concat(updatedCell)
-    .concat(puzzleObjs.slice(cellIndex + 1));
+  updatedPuzzle.push(updatedCell);
+  updatedPuzzle = updatedPuzzle.concat(puzzleObjs.slice(cellIndex + 1));
 
   return updatedPuzzle;
 };
