@@ -21,28 +21,45 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
   const [currentPuzzle, setCurrentPuzzle] = useState<puzzleArray>(puzzle);
   const [pressedArray, setPressedArray] = useState<string[]>([]);
 
+  const rowValues = getRowValues(currentPuzzle);
+  const columnValues = getColumnValues(currentPuzzle);
+
   const toggleItemSelect = (
     id: number | string,
     numberVal: string | number | null,
+    row: number | string,
+    column: number | string,
   ) => {
-    if (numberVal === 'draft') setClickType('draft');
-    if (numberVal === 'final') {
-      setClickType('final');
+    if (id === 'button') {
+      if (numberVal === 'draft') {
+        setClickType(clickType === 'draft' ? 'default' : 'draft');
+      } else if (numberVal === 'final') {
+        setClickType(clickType === 'final' ? 'default' : 'final');
+      } else {
+        setNumber(number === numberVal ? null : numberVal);
+      }
     }
+
     if (numberVal !== 'draft' && numberVal !== 'final' && id !== 'button') {
       setCurrentCell(id);
-      setCurrentPuzzle(updatePuzzle(currentPuzzle, id, numberVal, clickType));
+      setCurrentPuzzle(
+        updatePuzzle(
+          currentPuzzle,
+          id,
+          number,
+          clickType,
+          rowValues[Number(row) - 1],
+          columnValues[Number(column) - 1],
+        ),
+      );
     }
-    console.log('id and number', id, numberVal);
+    console.log('clickType and number', clickType, numberVal);
   };
 
   useEffect(() => {
     if (JSON.stringify(targetIds) === JSON.stringify(pressedArray))
       setIsPuzzleComplete(true);
   }, [pressedArray]);
-
-  const rowValues = getRowValues(currentPuzzle);
-  const columnValues = getColumnValues(currentPuzzle);
 
   const getTargetIds = (puzzle: puzzleArray) => {
     const targetsArray: string[] = [];
@@ -59,7 +76,6 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
 
   const [isPuzzleComplete, setIsPuzzleComplete] = useState<boolean>(false);
 
-  console.log('type and number', clickType, number);
   return (
     <>
       <View style={styles.flexrow_container}>
@@ -67,7 +83,10 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
           <FlatList
             data={currentPuzzle}
             renderItem={({item, index}) => (
-              <Pressable onPress={() => toggleItemSelect(item.id, number)}>
+              <Pressable
+                onPress={() =>
+                  toggleItemSelect(item.id, number, item.row, item.column)
+                }>
                 <Cell3
                   cellObj={item}
                   hitArray={pressedArray}
@@ -84,67 +103,28 @@ const Board3: React.FC<BoardProps> = ({puzzle}) => {
       </View>
       <View style={styles.button_container}>
         <View style={styles.button_row}>
-          <Pressable onPress={() => toggleItemSelect('button', 1)}>
-            <Button3 title={1} row={1}></Button3>
-          </Pressable>
-          <Pressable onPress={() => toggleItemSelect('button', 2)}>
-            <Button3 title={2} row={1}></Button3>
-          </Pressable>
-          <Pressable onPress={() => toggleItemSelect('button', 3)}>
-            <Button3 title={3} row={1}></Button3>
-          </Pressable>
-          <Pressable onPress={() => toggleItemSelect('button', 4)}>
-            <Button3 title={4} row={1}></Button3>
-          </Pressable>
-          <Pressable onPress={() => toggleItemSelect('button', 5)}>
-            <Button3 title={5} row={1}></Button3>
-          </Pressable>
-          <Pressable onPress={() => toggleItemSelect('button', 'draft')}>
-            <Button3
-              onPress={() => toggleItemSelect}
-              title={'Draft'}
-              row={1}
-              special="draft"></Button3>
-          </Pressable>
+          <Button3 valueCallback={toggleItemSelect} title={1} row={1}></Button3>
+          <Button3 valueCallback={toggleItemSelect} title={2} row={1}></Button3>
+          <Button3 valueCallback={toggleItemSelect} title={3} row={1}></Button3>
+          <Button3 valueCallback={toggleItemSelect} title={4} row={1}></Button3>
+          <Button3 valueCallback={toggleItemSelect} title={5} row={1}></Button3>
+          <Button3
+            valueCallback={toggleItemSelect}
+            title={'Draft'}
+            row={1}
+            special="draft"></Button3>
         </View>
         <View style={styles.button_row}>
-          <Pressable onPress={() => toggleItemSelect('button', 6)}>
-            <Button3
-              onPress={() => toggleItemSelect}
-              title={6}
-              row={2}></Button3>
-          </Pressable>
-          <Pressable onPress={() => toggleItemSelect('button', 7)}>
-            <Button3
-              onPress={() => toggleItemSelect}
-              title={7}
-              row={2}></Button3>
-          </Pressable>
-          <Pressable onPress={() => toggleItemSelect('button', 8)}>
-            <Button3
-              onPress={() => toggleItemSelect}
-              title={8}
-              row={2}></Button3>
-          </Pressable>
-          <Pressable onPress={() => toggleItemSelect('button', 9)}>
-            <Button3
-              onPress={() => toggleItemSelect}
-              title={9}
-              row={2}></Button3>
-          </Pressable>
-          <Pressable onPress={() => toggleItemSelect('button', 0)}>
-            <Button3
-              onPress={() => toggleItemSelect}
-              title={0}
-              row={2}></Button3>
-          </Pressable>
-          <Pressable onPress={() => toggleItemSelect('button', 'final')}>
-            <Button3
-              onPress={() => toggleItemSelect}
-              title={'Final'}
-              row={2}
-              special="final"></Button3>
-          </Pressable>
+          <Button3 valueCallback={toggleItemSelect} title={6} row={2}></Button3>
+          <Button3 valueCallback={toggleItemSelect} title={7} row={2}></Button3>
+          <Button3 valueCallback={toggleItemSelect} title={8} row={2}></Button3>
+          <Button3 valueCallback={toggleItemSelect} title={9} row={2}></Button3>
+          <Button3 valueCallback={toggleItemSelect} title={0} row={2}></Button3>
+          <Button3
+            valueCallback={toggleItemSelect}
+            title={'Final'}
+            row={2}
+            special="final"></Button3>
         </View>
       </View>
       {isPuzzleComplete && (
