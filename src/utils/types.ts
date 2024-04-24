@@ -12,9 +12,9 @@ export type ButtonProps = {
 };
 
 export type Button3Props = {
-  onPress?: (id: string, type: string | number | null | undefined) => void;
+  valueCallback?: (id: number | string, numberVal: string | number | null, row: number | string, column: number | string) => void; 
   onLongPress?: () => void;
-  title?: string | number | null;
+  title?: string | number | null | undefined;
   disabled?: boolean;
   loading?: boolean;
   row?: number;
@@ -34,8 +34,8 @@ export type CellProps = {
 export type puzzleArray = {
     id: string;
     value: string;
-    row: number;
-    column: number | null;
+    row: number | string;
+    column: number | string;
     target: boolean | null;
     clickType: string;
     isLabel?: boolean | null;
@@ -45,8 +45,8 @@ export type puzzleArray = {
 export type cellObject = {
   id: string;
   value: string;
-  row: number;
-  column: number | null;
+  row: number | string;
+  column: number | string;
   target: boolean | null;
   clickType: string;
   isLabel?: boolean | null;
