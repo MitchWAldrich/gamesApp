@@ -54,12 +54,26 @@ export const formatRow = (row: cellObject[]) => {
   return newArray;
 };
 
+export const isValuePresent = (
+  rowArray: (string | number | undefined)[],
+  columnArray: (string | number | undefined)[],
+  currentValue: string | number | undefined,
+) => {
+  if (!columnArray || !rowArray || !currentValue) return;
+  
+  return rowArray.includes(currentValue) || rowArray.includes(currentValue?.toString()) || columnArray.includes(currentValue) || columnArray.includes(currentValue?.toString());
+};
+
 export const updatePuzzle = (
   puzzleObjs: puzzleArray,
   cellId: string | number,
   cellValue: string | number | null,
   clickType: string,
+  rowValues: (string | undefined)[],
+  columnValues: (string | undefined)[],
 ) => {
+  let updatedClickType = clickType;
+
   const cellIndex = puzzleObjs.findIndex(
     (puzzleObj: cellObject) => puzzleObj.id === cellId,
   );
@@ -69,7 +83,7 @@ export const updatePuzzle = (
 
   let updatedCellValue: (string | number)[] | null | undefined = originalCell?.label ? [...originalCell?.label] : [];
 
-  if (clickType === 'draft') {
+  if (updatedClickType === 'draft') {
     if (updatedCellValue && cellValue) {
       const cellValueIndex = updatedCellValue.indexOf(cellValue);
 
@@ -77,8 +91,10 @@ export const updatePuzzle = (
     }
   }
 
-  if (clickType === 'final') {
+  if (updatedClickType === 'final') {
     if (updatedCellValue && cellValue) {
+      if (isValuePresent(rowValues, columnValues, cellValue)) updatedClickType = 'finalError';
+
       if (updatedCellValue.length === 1 && updatedCellValue.includes(cellValue)) {
         updatedCellValue.pop();
       } else if (updatedCellValue.length === 1 && !updatedCellValue.includes(cellValue)) {
@@ -99,7 +115,7 @@ export const updatePuzzle = (
     column: originalCell?.column ?? puzzleObjs[Number(cellId) - 1].column,
     target: originalCell?.target ?? puzzleObjs[Number(cellId) - 1].target,
     clickType:
-      clickType ?? puzzleObjs[Number(cellId) - 1].clickType,
+      updatedClickType ?? puzzleObjs[Number(cellId) - 1].clickType,
     isLabel: originalCell?.isLabel ?? puzzleObjs[Number(cellId) - 1].isLabel,
     label: updatedCellValue ?? puzzleObjs[Number(cellId) - 1].label,
   };
@@ -113,89 +129,69 @@ export const updatePuzzle = (
 };
 
 export const getRowValues = (puzzle: puzzleArray) => {
-  const rowsObj: {
-    1: (string | undefined)[];
-    2: (string | undefined)[];
-    3: (string | undefined)[];
-    4: (string | undefined)[];
-    5: (string | undefined)[];
-    6: (string | undefined)[];
-    7: (string | undefined)[];
-    8: (string | undefined)[];
-    9: (string | undefined)[];
-  } = {
-    1: puzzle
+  const rowsArray: (string | undefined)[][] = [
+    puzzle
       .filter(cell => cell.row === 1 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    2: puzzle
+    puzzle
       .filter(cell => cell.row === 2 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    3: puzzle
+    puzzle
       .filter(cell => cell.row === 3 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    4: puzzle
+    puzzle
       .filter(cell => cell.row === 4 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    5: puzzle
+    puzzle
       .filter(cell => cell.row === 5 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    6: puzzle
+    puzzle
       .filter(cell => cell.row === 6 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    7: puzzle
+    puzzle
       .filter(cell => cell.row === 7 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    8: puzzle
+    puzzle
       .filter(cell => cell.row === 8 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    9: puzzle
+    puzzle
       .filter(cell => cell.row === 9 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-  };
+  ];
 
-  return rowsObj;
+  return rowsArray;
 };
 
 export const getColumnValues = (puzzle: puzzleArray) => {
-  const columnsObj: {
-    1: (string | undefined)[];
-    2: (string | undefined)[];
-    3: (string | undefined)[];
-    4: (string | undefined)[];
-    5: (string | undefined)[];
-    6: (string | undefined)[];
-    7: (string | undefined)[];
-    8: (string | undefined)[];
-    9: (string | undefined)[];
-  } = {
-    1: puzzle
+  const columnsArray: (string | undefined)[][] = [
+    puzzle
       .filter(cell => cell.column === 1 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    2: puzzle
+    puzzle
       .filter(cell => cell.column === 2 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    3: puzzle
+    puzzle
       .filter(cell => cell.column === 3 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    4: puzzle
+    puzzle
       .filter(cell => cell.column === 4 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    5: puzzle
+    puzzle
       .filter(cell => cell.column === 5 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    6: puzzle
+    puzzle
       .filter(cell => cell.column === 6 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    7: puzzle
+    puzzle
       .filter(cell => cell.column === 7 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    8: puzzle
+    puzzle
       .filter(cell => cell.column === 8 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-    9: puzzle
+    puzzle
       .filter(cell => cell.column === 9 && cell.label?.toString() !== '')
       .map(cell => cell.label?.toString()),
-  };
+  ];
 
-  return columnsObj;
+  return columnsArray;
 };
