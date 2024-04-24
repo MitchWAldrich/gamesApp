@@ -4,7 +4,12 @@ import {styles} from '../styles/board3styles';
 import {Button3Props} from '../utils/types';
 import {useState} from 'react';
 
-const Button3: React.FC<Button3Props> = ({onPress, title, row, special}) => {
+const Button3: React.FC<Button3Props> = ({
+  valueCallback,
+  title,
+  row,
+  special,
+}) => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
 
   const animatedButton = useAnimatedStyle(() => {
@@ -72,10 +77,11 @@ const Button3: React.FC<Button3Props> = ({onPress, title, row, special}) => {
           fontWeight: 'normal',
         };
   });
-
   // const buttonPress = (titleVal: string | number | null | undefined) => {
-  const buttonPress = (type: string | number | null | undefined) => {
-    if (onPress) onPress('button', type);
+  const buttonPress = (type: string | number | null) => {
+    if (valueCallback) {
+      valueCallback('button', type, 'B1', '');
+    }
 
     setIsPressed(!isPressed);
   };
@@ -84,7 +90,7 @@ const Button3: React.FC<Button3Props> = ({onPress, title, row, special}) => {
     <>
       {row === 1 && special !== 'draft' && (
         <Animated.View style={[styles.number_buttons, animatedButton]}>
-          <Pressable onPress={() => buttonPress(title)}>
+          <Pressable onPress={() => buttonPress(title ?? '')}>
             <Animated.Text style={[styles.button_text, animatedButtonText]}>
               {title}
             </Animated.Text>
@@ -102,7 +108,7 @@ const Button3: React.FC<Button3Props> = ({onPress, title, row, special}) => {
       )}
       {row === 2 && title !== 0 && special !== 'final' && (
         <Animated.View style={[styles.number_buttons2, animatedButton]}>
-          <Pressable onPress={() => buttonPress(title)}>
+          <Pressable onPress={() => buttonPress(title ?? '')}>
             <Animated.Text style={[styles.button_text, animatedButtonText]}>
               {title}
             </Animated.Text>
