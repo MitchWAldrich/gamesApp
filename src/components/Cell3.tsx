@@ -4,14 +4,21 @@ import {CellProps} from '../utils/types';
 import {styles} from '../styles/cell3styles';
 
 const Cell3: React.FC<CellProps> = ({cellObj}) => {
+  const chooseColour = (clickType: string) => {
+    let colour = 'black';
+    if (clickType === 'default') colour = 'black';
+    if (clickType === 'draft') colour = 'blue';
+    if (clickType === 'draftError') colour = 'red';
+    if (clickType === 'final') colour = 'green';
+    if (clickType === 'finalError') colour = 'red';
+
+    return colour;
+  };
+  const colour = chooseColour(cellObj.clickType);
+
   const animatedText = useAnimatedStyle(() => {
     return {
-      color:
-        cellObj.clickType === 'final'
-          ? 'green'
-          : cellObj.clickType === 'draft'
-          ? 'blue'
-          : 'black',
+      color: colour,
       fontSize: cellObj.clickType === 'draft' ? 9 : 15,
     };
   });
